@@ -28,7 +28,7 @@ include 'header.php';
         <?php if (!$jobs) : ?>
           <div class="col-12 text-center">
             <p class="nz-lead mb-4">No open roles right now — send your profile and we will keep you in mind.</p>
-            <a class="nz-header-btn" href="mailto:skonlineitsolution@gmail.com">Email Your CV</a>
+            <a class="nz-header-btn" href="mailto:<?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?>">Email Your CV</a>
           </div>
         <?php else : ?>
           <?php foreach ($jobs as $job) : ?>
@@ -55,7 +55,7 @@ include 'header.php';
       <div class="nz-page-cta mt-5 text-center">
         <h3>Don't see the right role?</h3>
         <p>Send your profile anyway — we hire for attitude and growth potential.</p>
-        <a class="nz-header-btn" href="mailto:skonlineitsolution@gmail.com">Email Your CV</a>
+        <a class="nz-header-btn" href="mailto:<?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?>">Email Your CV</a>
       </div>
     </div>
   </div>

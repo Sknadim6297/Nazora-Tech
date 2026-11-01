@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     save_submission_to_file($name, $email, $phone, $service, $message);
     
     // Email configuration
-    $to = 'skonlineitsolution@gmail.com'; // Replace with your email
+    $to = site_contact_email();
     $subject = !empty($service)
         ? 'New ' . $service . ' Inquiry from ' . site_company_name() . ' Website'
         : 'New Contact Form Submission from ' . site_company_name() . ' Website';
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Email headers
     $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-    $headers .= "From: noreply@snfteam.com\r\n";
+    $headers .= 'From: Nazora Tech <' . site_contact_email() . ">\r\n";
     $headers .= "Reply-To: " . $email . "\r\n";
     
     // Email body
@@ -159,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($mail_sent || true) {
         // Send confirmation email to user
         $user_subject = 'We received your message - ' . site_company_name();
-        $user_headers = "From: noreply@snfteam.com\r\n";
+        $user_headers = 'From: Nazora Tech <' . site_contact_email() . ">\r\n";
         $user_headers .= "Content-Type: text/html; charset=UTF-8\r\n";
         
         $user_email_body = "

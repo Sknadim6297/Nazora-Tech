@@ -1,4 +1,7 @@
 <?php
+header('Location: dashboard.php');
+exit;
+
 require_once __DIR__ . '/../includes/blog_app.php';
 blog_require_login();
 

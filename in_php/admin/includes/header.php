@@ -2,16 +2,13 @@
 $flashMessage = blog_get_flash();
 $currentUser = blog_current_user();
 $pageTitle = $pageTitle ?? 'Admin Panel';
-$pageSubtitle = $pageSubtitle ?? 'Manage content, careers, SEO, and media.';
+$pageSubtitle = $pageSubtitle ?? 'Manage careers and site content.';
 $activeMenu = $activeMenu ?? '';
 
 $navItems = [
     ['id' => 'dashboard', 'label' => 'Dashboard', 'href' => 'dashboard.php', 'icon' => 'ri-dashboard-3-line'],
-    ['id' => 'posts', 'label' => 'Blog Posts', 'href' => 'posts.php', 'icon' => 'ri-article-line'],
     ['id' => 'careers', 'label' => 'Careers', 'href' => 'careers.php', 'icon' => 'ri-briefcase-4-line'],
-    ['id' => 'categories', 'label' => 'Categories', 'href' => 'categories.php', 'icon' => 'ri-folder-3-line'],
-    ['id' => 'tags', 'label' => 'Tags', 'href' => 'tags.php', 'icon' => 'ri-price-tag-3-line'],
-    ['id' => 'settings', 'label' => 'SEO Settings', 'href' => 'settings.php', 'icon' => 'ri-seo-line'],
+    ['id' => 'portfolio', 'label' => 'Portfolio', 'href' => 'portfolio.php', 'icon' => 'ri-gallery-line'],
 ];
 ?>
 <!DOCTYPE html>
@@ -49,21 +46,17 @@ $navItems = [
         <div class="admin-nav-group">
           <span class="admin-nav-label">Quick Actions</span>
           <nav class="admin-nav admin-nav--compact">
-            <a href="post-form.php" class="admin-nav-link admin-nav-link--cta">
-              <span class="admin-nav-icon"><i class="ri-add-circle-line"></i></span>
-              <span class="admin-nav-text">New Blog Post</span>
-            </a>
-            <a href="career-form.php" class="admin-nav-link">
+            <a href="career-form.php" class="admin-nav-link admin-nav-link--cta">
               <span class="admin-nav-icon"><i class="ri-briefcase-line"></i></span>
               <span class="admin-nav-text">New Career Opening</span>
+            </a>
+            <a href="portfolio-form.php" class="admin-nav-link">
+              <span class="admin-nav-icon"><i class="ri-gallery-line"></i></span>
+              <span class="admin-nav-text">New Portfolio Project</span>
             </a>
             <a href="<?php echo blog_escape(blog_url('index.php')); ?>" class="admin-nav-link" target="_blank" rel="noopener">
               <span class="admin-nav-icon"><i class="ri-external-link-line"></i></span>
               <span class="admin-nav-text">View Website</span>
-            </a>
-            <a href="seed-demo.php" class="admin-nav-link">
-              <span class="admin-nav-icon"><i class="ri-database-2-line"></i></span>
-              <span class="admin-nav-text">Demo Data</span>
             </a>
           </nav>
         </div>
@@ -73,7 +66,7 @@ $navItems = [
             <i class="ri-lightbulb-flash-line"></i>
             <div>
               <strong>Pro tip</strong>
-              <p>Use SEO fields when publishing for better search rankings.</p>
+              <p>Published career openings appear on the public Careers page.</p>
             </div>
           </div>
         </div>

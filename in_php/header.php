@@ -96,8 +96,8 @@ $pageSchemaMarkup = $pageSchemaMarkup ?? null;
 
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/app.min.css">
-  <link rel="stylesheet" href="assets/css/nazora-home.css">
-  <link rel="stylesheet" href="assets/css/nazora-theme.css">
+  <link rel="stylesheet" href="assets/css/nazora-home.css?v=<?php echo (int) @filemtime(__DIR__ . '/assets/css/nazora-home.css'); ?>">
+  <link rel="stylesheet" href="assets/css/nazora-theme.css?v=<?php echo (int) @filemtime(__DIR__ . '/assets/css/nazora-theme.css'); ?>">
   <?php if (!empty($loadBlogAssets)) : ?>
   <link rel="stylesheet" href="assets/css/blog.css">
   <?php endif; ?>
@@ -115,7 +115,7 @@ $pageSchemaMarkup = $pageSchemaMarkup ?? null;
     "@type": "LocalBusiness",
     "name": "<?php echo htmlspecialchars($company, ENT_QUOTES, 'UTF-8'); ?>",
     "description": "Website, app, software, and AI automation company based in Kolkata.",
-    "email": "skonlineitsolution@gmail.com",
+    "email": "<?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?>",
     "telephone": "+91-6297616918",
     "address": {
       "@type": "PostalAddress",
@@ -187,7 +187,7 @@ $pageSchemaMarkup = $pageSchemaMarkup ?? null;
           <div class="optech-header-info">
             <ul>
               <li><a href="tel:6297616918"><i class="ri-phone-fill"></i>+91-6297616918</a></li>
-              <li><a href="mailto:skonlineitsolution@gmail.com"><i class="ri-mail-fill"></i>skonlineitsolution@gmail.com</a></li>
+              <li><a href="mailto:<?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?>"><i class="ri-mail-fill"></i><?php echo htmlspecialchars(site_company_name(), ENT_QUOTES, 'UTF-8'); ?></a></li>
             </ul>
           </div>
         </div>
@@ -238,9 +238,6 @@ $pageSchemaMarkup = $pageSchemaMarkup ?? null;
                   </li>
                   <li class="nav-item">
                     <a href="portfolio" class="nav-link-item">Portfolio</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="blog" class="nav-link-item">Blog</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link-item" href="contact">Contact</a>
@@ -309,7 +306,7 @@ $pageSchemaMarkup = $pageSchemaMarkup ?? null;
           <div class="optech-contact-info">
             <i class="ri-mail-fill"></i>
             <h5>Contact</h5>
-            <a href="mailto:skonlineitsolution@gmail.com">skonlineitsolution@gmail.com</a>
+            <a href="mailto:<?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars(site_company_name(), ENT_QUOTES, 'UTF-8'); ?></a>
             <a href="tel:6297616918">+91-6297616918</a>
           </div>
         </div>

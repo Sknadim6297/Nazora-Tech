@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div>
         <img src="../assets/images/logo/nazora-logo.png" alt="<?php echo blog_escape(site_company_name()); ?>" class="login-logo">
         <h1>Nazora TECH Admin</h1>
-        <p>Manage blog content, careers, SEO, and media from one dashboard.</p>
+        <p>Manage careers and portfolio projects from one dashboard.</p>
       </div>
     </section>
 

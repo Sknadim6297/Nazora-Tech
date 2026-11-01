@@ -15,68 +15,33 @@
   <div class="section optech-section-padding">
     <div class="container">
       <div class="nz-page-intro text-center mb-5">
-        <span class="nz-kicker">People Behind Nazora</span>
-        <h2 class="nz-title">A focused team that delivers</h2>
-        <p class="nz-lead">Designers, developers, and support specialists working together so every project stays clear, fast, and practical.</p>
+        <span class="nz-kicker">Leadership</span>
+        <h2 class="nz-title">The people behind Nazora Tech</h2>
+        <p class="nz-lead">A small leadership team that stays close to the work, from the first brief through launch and growth.</p>
       </div>
 
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-3">
-          <article class="nz-team-card">
-            <img src="assets/images/team/team1.png" alt="Team member">
-            <h4>Rajesh Kumar</h4>
-            <span>Project Lead</span>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <article class="nz-team-card">
-            <img src="assets/images/team/team2.png" alt="Team member">
-            <h4>Priya Sharma</h4>
-            <span>UI/UX Designer</span>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <article class="nz-team-card">
-            <img src="assets/images/team/team3.png" alt="Team member">
-            <h4>Amit Patel</h4>
-            <span>Full-Stack Developer</span>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <article class="nz-team-card">
-            <img src="assets/images/team/team4.png" alt="Team member">
-            <h4>Neha Singh</h4>
-            <span>Digital Marketing</span>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <article class="nz-team-card">
-            <img src="assets/images/team/team5.png" alt="Team member">
-            <h4>Sourav Das</h4>
-            <span>App Developer</span>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <article class="nz-team-card">
-            <img src="assets/images/team/team6.png" alt="Team member">
-            <h4>Ananya Roy</h4>
-            <span>QA &amp; Support</span>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <article class="nz-team-card">
-            <img src="assets/images/team/team7.png" alt="Team member">
-            <h4>Vikram Sen</h4>
-            <span>Software Engineer</span>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <article class="nz-team-card">
-            <img src="assets/images/team/team8.png" alt="Team member">
-            <h4>Ritu Banerjee</h4>
-            <span>Client Success</span>
-          </article>
-        </div>
+      <div class="nz-team-grid">
+        <article class="nz-team-card">
+          <div class="nz-team-photo nz-team-photo--studio">
+            <img src="assets/team-image/sk-nadim.png" alt="Sk Nadim">
+          </div>
+          <h4>Sk Nadim</h4>
+          <span>Founder &amp; Senior Developer</span>
+        </article>
+        <article class="nz-team-card">
+          <div class="nz-team-photo">
+            <img src="assets/team-image/shazia-afrin.jpeg" alt="Shazia Afrin">
+          </div>
+          <h4>Shazia Afrin</h4>
+          <span>Chief Executive Officer &amp; Marketing Head</span>
+        </article>
+        <article class="nz-team-card">
+          <div class="nz-team-photo nz-team-photo--studio">
+            <img src="assets/team-image/Rahul-saha.png" alt="Rahul Saha">
+          </div>
+          <h4>Rahul Saha</h4>
+          <span>Partner &amp; Senior Developer</span>
+        </article>
       </div>
 
       <div class="nz-page-cta mt-5 text-center">

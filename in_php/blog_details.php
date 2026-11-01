@@ -1,4 +1,8 @@
 <?php
+$siteBase = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
+header('Location: ' . ($siteBase === '' ? '' : $siteBase) . '/index');
+exit;
+
 require_once __DIR__ . '/includes/blog_app.php';
 require_once __DIR__ . '/includes/blog_frontend.php';
 

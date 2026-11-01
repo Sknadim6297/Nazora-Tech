@@ -75,8 +75,13 @@
               <div class="optech-contact-info">
                 <i class="ri-mail-fill"></i>
                 <h5>Contact</h5>
+<<<<<<< HEAD
                 <a href="mailto:info@nazora.tech">info@nazora.tech</a>
                 <a href="tel:9332016918">9332016918</a>
+=======
+                <a href="mailto:<?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars(site_company_name(), ENT_QUOTES, 'UTF-8'); ?></a>
+                <a href="tel:6297616918">+91-6297616918</a>
+>>>>>>> b82b822 (chnages)
               </div>
             </div>
           </div>

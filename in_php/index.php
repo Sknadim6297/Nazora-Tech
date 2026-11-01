@@ -1,8 +1,4 @@
 <?php
-require_once __DIR__ . '/includes/blog_app.php';
-require_once __DIR__ . '/includes/blog_frontend.php';
-$latestBlogPosts = blog_get_recent_posts(3);
-$loadBlogAssets = true;
 $loadNazoraHome = true;
 include 'header.php';
 ?>
@@ -23,16 +19,32 @@ include 'header.php';
   <section class="nz-trust">
     <div class="container">
       <div class="nz-trust-card">
-        <h3>Trusted by growing brands and organizations of all sizes</h3>
-        <div class="nz-trust-logos">
-          <img src="assets/images/brand/brand1.svg" alt="Partner brand">
-          <img src="assets/images/brand/brand2.svg" alt="Partner brand">
-          <img src="assets/images/brand/brand3.svg" alt="Partner brand">
-          <img src="assets/images/brand/brand4.svg" alt="Partner brand">
-          <img src="assets/images/brand/brand5.svg" alt="Partner brand">
-          <img src="assets/images/brand/brand01.svg" alt="Partner brand">
-          <img src="assets/images/brand/brand02.svg" alt="Partner brand">
-          <img src="assets/images/brand/brand03.svg" alt="Partner brand">
+        <h3>A practical path from a short brief to a live product</h3>
+        <div class="nz-start-grid">
+          <a class="nz-start-step" href="contact">
+            <em>01</em>
+            <strong>Share the goal</strong>
+            <p>Send a note or a WhatsApp message. We only ask what we need for the first version.</p>
+            <span>Start a brief</span>
+          </a>
+          <a class="nz-start-step" href="pricing">
+            <em>02</em>
+            <strong>See a starting plan</strong>
+            <p>Websites from ₹1,999, apps from ₹7,999, and software from ₹4,999. The quote follows the scope.</p>
+            <span>View pricing</span>
+          </a>
+          <a class="nz-start-step" href="portfolio">
+            <em>03</em>
+            <strong>Review real work</strong>
+            <p>Open case studies for websites, apps, software, and brand marks before you decide.</p>
+            <span>Open portfolio</span>
+          </a>
+          <a class="nz-start-step" href="<?php echo site_whatsapp_url(); ?>" target="_blank" rel="noopener">
+            <em>04</em>
+            <strong>Talk to the team</strong>
+            <p>Ask a question on WhatsApp and get a clear next step from the Kolkata studio.</p>
+            <span>Chat on WhatsApp</span>
+          </a>
         </div>
       </div>
     </div>
@@ -412,28 +424,6 @@ include 'header.php';
             </li>
           </ul>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="nz-section" style="background:#fff;padding-top:40px">
-    <div class="container">
-      <div class="nz-head-center">
-        <span class="nz-kicker">Fresh from the blog</span>
-        <h2 class="nz-title">Latest Blogs</h2>
-        <p class="nz-lead">Short, practical articles that support SEO, trust, and repeat visits.</p>
-      </div>
-      <?php if ($latestBlogPosts) : ?>
-      <div class="snf-blog-home-grid">
-        <?php foreach ($latestBlogPosts as $blogPost) : ?>
-          <?php blog_render_post_card($blogPost, 'grid'); ?>
-        <?php endforeach; ?>
-      </div>
-      <?php else : ?>
-      <p class="text-center text-muted">New articles will appear here soon.</p>
-      <?php endif; ?>
-      <div class="text-center mt-4">
-        <a class="optech-default-btn nz-btn-red" href="blog" data-text="Visit Blog"><span class="btn-wraper">Visit Blog</span></a>
       </div>
     </div>
   </section>

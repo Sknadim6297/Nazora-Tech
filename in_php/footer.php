@@ -17,7 +17,6 @@
         <div class="nz-footer-col">
           <h5>Resources</h5>
           <ul>
-            <li><a href="blog">Blog</a></li>
             <li><a href="portfolio">Portfolio</a></li>
             <li><a href="about_us">Case Studies</a></li>
             <li><a href="service">Service Catalog</a></li>
@@ -39,7 +38,6 @@
             <li><a href="about_us">About Us</a></li>
             <li><a href="team">Our Team</a></li>
             <li><a href="careers">Careers</a></li>
-            <li><a href="blog">Articles &amp; News</a></li>
             <li><a href="contact">Legal Notices</a></li>
           </ul>
         </div>
@@ -112,6 +110,7 @@
   <?php endif; ?>
 
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/nz-reveal.js"></script>
   <script>
     (function ($) {
       function hidePreloader() {
