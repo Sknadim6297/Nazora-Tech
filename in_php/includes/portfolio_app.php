@@ -29,6 +29,12 @@ function portfolio_ensure_schema(?PDO $pdo = null): void
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_portfolio_slug ON portfolio_projects(slug)');
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_portfolio_deleted ON portfolio_projects(deleted_at)');
 
+    $columns = array_column($pdo->query('PRAGMA table_info(portfolio_projects)')->fetchAll(), 'name');
+    if (!in_array('is_sample', $columns, true)) {
+        $pdo->exec('ALTER TABLE portfolio_projects ADD COLUMN is_sample INTEGER NOT NULL DEFAULT 0');
+        $pdo->exec("UPDATE portfolio_projects SET is_sample = 1 WHERE client_name LIKE 'Sample%'");
+    }
+
     $count = (int) $pdo->query('SELECT COUNT(*) FROM portfolio_projects WHERE deleted_at IS NULL')->fetchColumn();
     if ($count > 0) {
         return;
@@ -134,6 +140,106 @@ function portfolio_ensure_schema(?PDO $pdo = null): void
             $row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9], $row[10], $row[11], 'published', $row[12], $now, $now,
         ]);
     }
+    $pdo->exec("UPDATE portfolio_projects SET is_sample = 1 WHERE client_name LIKE 'Sample%'");
+}
+
+function portfolio_is_sample(array $project): bool
+{
+    return (int) ($project['is_sample'] ?? 0) === 1;
+}
+
+/**
+ * Related service page for a portfolio category: ['url' => slug, 'label' => text].
+ */
+function portfolio_service_link(string $category): array
+{
+    $map = [
+        'Website' => ['url' => 'service_details', 'label' => 'Website Development in Kolkata'],
+        'App' => ['url' => 'app_development_details', 'label' => 'Mobile App Development in Kolkata'],
+        'Software' => ['url' => 'software_development_details', 'label' => 'Custom Software Development in Kolkata'],
+    ];
+
+    return $map[$category] ?? ['url' => 'service', 'label' => 'All Nazora Tech Services'];
+}
+
+function portfolio_kind_label(array $project): string
+{
+    $labels = [
+        'Website' => 'Website',
+        'App' => 'Mobile App',
+        'Software' => 'Business Software',
+        'Branding' => 'Logo & Brand Mark',
+    ];
+    $kind = $labels[$project['category'] ?? ''] ?? (string) ($project['category'] ?? 'Project');
+
+    return portfolio_is_sample($project) ? 'Sample ' . $kind : $kind;
+}
+
+function portfolio_seo_title(array $project): string
+{
+    $suffix = ' | ' . site_company_name();
+    $title = (string) $project['title'];
+    $kind = portfolio_kind_label($project);
+    $full = $title . ' – ' . $kind . ' Case Study' . $suffix;
+    if (mb_strlen($full, 'UTF-8') > 60) {
+        $full = $title . ' – ' . $kind . $suffix;
+    }
+
+    return site_seo_truncate($full, 60);
+}
+
+function portfolio_meta_description(array $project): string
+{
+    $summary = rtrim(trim((string) ($project['summary'] ?? '')), '.');
+    $lead = portfolio_is_sample($project)
+        ? 'Sample ' . strtolower(portfolio_kind_label(['category' => $project['category'] ?? ''])) . ' case study by ' . site_company_name() . ', Kolkata: '
+        : portfolio_kind_label($project) . ' project by ' . site_company_name() . ', Kolkata: ';
+
+    return site_seo_truncate($lead . lcfirst($summary) . '.', 155);
+}
+
+function portfolio_image_alt(array $project): string
+{
+    $title = (string) $project['title'];
+    $sample = portfolio_is_sample($project) ? 'sample ' : '';
+    switch ($project['category'] ?? '') {
+        case 'Website':
+            return $title . ' ' . $sample . 'website homepage designed and built by ' . site_company_name();
+        case 'App':
+            return $title . ' ' . $sample . 'mobile app screens designed by ' . site_company_name();
+        case 'Software':
+            return $title . ' ' . $sample . 'business software dashboard built by ' . site_company_name();
+        case 'Branding':
+            return $title . ' logo design by ' . site_company_name();
+        default:
+            return $title . ' project by ' . site_company_name();
+    }
+}
+
+/**
+ * WebP sibling for a PNG/JPEG path when one exists on disk, else ''.
+ */
+function portfolio_webp_path(string $imgPath): string
+{
+    if ($imgPath === '' || !preg_match('/\.(png|jpe?g)$/i', $imgPath)) {
+        return '';
+    }
+    $candidate = preg_replace('/\.(png|jpe?g)$/i', '.webp', $imgPath);
+
+    return is_file(blog_root_path() . '/' . $candidate) ? $candidate : '';
+}
+
+/**
+ * [width, height] of a local image, or [0, 0] when unknown.
+ */
+function portfolio_image_size(string $path): array
+{
+    if ($path === '' || preg_match('~^https?://~i', $path)) {
+        return [0, 0];
+    }
+    $info = @getimagesize(blog_root_path() . '/' . ltrim($path, '/'));
+
+    return $info ? [(int) $info[0], (int) $info[1]] : [0, 0];
 }
 
 function portfolio_list(array $filters = []): array
@@ -231,8 +337,12 @@ function portfolio_save(array $data, ?int $id = null, ?array $imageFile = null):
     $client = trim((string) ($data['client_name'] ?? ''));
     $projectDate = trim((string) ($data['project_date'] ?? ''));
     $liveUrl = trim((string) ($data['live_url'] ?? ''));
+    if ($liveUrl !== '' && (!preg_match('#^https?://#i', $liveUrl) || !filter_var($liveUrl, FILTER_VALIDATE_URL))) {
+        return ['success' => false, 'errors' => ['Live URL must start with http:// or https://.']];
+    }
     $status = ($data['status'] ?? 'published') === 'draft' ? 'draft' : 'published';
     $sortOrder = (int) ($data['sort_order'] ?? 0);
+    $isSample = !empty($data['is_sample']) ? 1 : 0;
     $now = blog_now();
 
     if ($title === '' || $summary === '' || $overview === '') {
@@ -254,14 +364,14 @@ function portfolio_save(array $data, ?int $id = null, ?array $imageFile = null):
     }
 
     if ($id && $existing) {
-        $stmt = $pdo->prepare('UPDATE portfolio_projects SET title = ?, slug = ?, category = ?, summary = ?, overview = ?, challenge = ?, result = ?, features = ?, client_name = ?, project_date = ?, image = ?, live_url = ?, status = ?, sort_order = ?, updated_at = ? WHERE id = ? AND deleted_at IS NULL');
-        $stmt->execute([$title, $slug, $category, $summary, $overview, $challenge, $result, $features, $client, $projectDate, $image, $liveUrl, $status, $sortOrder, $now, $id]);
+        $stmt = $pdo->prepare('UPDATE portfolio_projects SET title = ?, slug = ?, category = ?, summary = ?, overview = ?, challenge = ?, result = ?, features = ?, client_name = ?, project_date = ?, image = ?, live_url = ?, status = ?, sort_order = ?, is_sample = ?, updated_at = ? WHERE id = ? AND deleted_at IS NULL');
+        $stmt->execute([$title, $slug, $category, $summary, $overview, $challenge, $result, $features, $client, $projectDate, $image, $liveUrl, $status, $sortOrder, $isSample, $now, $id]);
 
         return ['success' => true, 'id' => $id];
     }
 
-    $stmt = $pdo->prepare('INSERT INTO portfolio_projects (title, slug, category, summary, overview, challenge, result, features, client_name, project_date, image, live_url, status, sort_order, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-    $stmt->execute([$title, $slug, $category, $summary, $overview, $challenge, $result, $features, $client, $projectDate, $image, $liveUrl, $status, $sortOrder, $now, $now]);
+    $stmt = $pdo->prepare('INSERT INTO portfolio_projects (title, slug, category, summary, overview, challenge, result, features, client_name, project_date, image, live_url, status, sort_order, is_sample, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute([$title, $slug, $category, $summary, $overview, $challenge, $result, $features, $client, $projectDate, $image, $liveUrl, $status, $sortOrder, $isSample, $now, $now]);
 
     return ['success' => true, 'id' => (int) $pdo->lastInsertId()];
 }

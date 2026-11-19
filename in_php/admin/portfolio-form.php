@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'live_url' => $_POST['live_url'] ?? '',
             'status' => $_POST['status'] ?? 'published',
             'sort_order' => $_POST['sort_order'] ?? 0,
+            'is_sample' => !empty($_POST['is_sample']) ? 1 : 0,
         ];
         $result = portfolio_save($payload, $id > 0 ? $id : null, $_FILES['image'] ?? null);
         if ($result['success']) {
@@ -141,6 +142,12 @@ include __DIR__ . '/includes/header.php';
           <option value="draft" <?php echo ($project['status'] ?? '') === 'draft' ? 'selected' : ''; ?>>Draft</option>
         </select>
       </div>
+    </div>
+
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" name="is_sample" value="1" id="is_sample" <?php echo !empty($project['is_sample']) ? 'checked' : ''; ?>>
+      <label class="form-check-label" for="is_sample">Sample / demo project (not real client work)</label>
+      <div class="form-text">Shown to visitors with a "Sample" label so it is never mistaken for a client result.</div>
     </div>
 
     <div class="mb-3">

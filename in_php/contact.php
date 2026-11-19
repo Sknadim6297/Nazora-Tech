@@ -1,12 +1,19 @@
-<?php include 'header.php'; ?>
+<?php
+require_once __DIR__ . '/includes/site_config.php';
+$pageBreadcrumbs = [
+  ['name' => 'Home', 'url' => site_url('')],
+  ['name' => 'Contact Us', 'url' => site_url('contact')],
+];
+include 'header.php';
+?>
 
   <div class="optech-breadcrumb nz-breadcrumb">
     <div class="container">
-      <h1 class="post__title">Contact us</h1>
-      <nav class="breadcrumbs">
+      <h1 class="post__title">Contact Nazora Tech</h1>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
         <ul>
-          <li><a href='index'>Home</a></li>
-          <li aria-current="page"> Contact us</li>
+          <li><a href="./">Home</a></li>
+          <li aria-current="page">Contact us</li>
         </ul>
       </nav>
     </div>
@@ -18,9 +25,10 @@
       <div class="row g-4 align-items-start">
         <div class="col-lg-6">
           <div class="optech-main-form nz-form-card">
-            <h3>Fill The Contact Form</h3>
+            <h2>Fill The Contact Form</h2>
             <p>Feel free to contact with us, we don't spam your email</p>
-            <form class="nz-form" action="send_email.php" method="POST">
+            <form class="nz-form" action="send_email.php" method="POST" data-form-id="contact_page">
+              <div class="nz-hp" aria-hidden="true"><label>Website <input type="text" name="company_website" tabindex="-1" autocomplete="off"></label></div>
               <div class="row">
                 <div class="col-lg-6">
                   <div class="optech-main-field">
@@ -64,24 +72,19 @@
         <div class="col-lg-6 d-flex align-items-center">
           <div class="optech-default-content">
             <h2>Let's build an awesome project together</h2>
-            <p>Get in touch with our team. We're always ready to help you transform your business with innovative IT solutions. Fill out the form and we'll respond within 24 hours.</p>
+            <p>Get in touch with our team in Kestopur, Kolkata. We serve businesses across Salt Lake, New Town, Kolkata, West Bengal, and remote teams across India. Fill out the form and we'll respond within 24 hours.</p>
             <div class="optech-contact-info-column">
               <div class="optech-contact-info">
                 <i class="ri-map-pin-2-fill"></i>
-                <h5>Business Information</h5>
+                <h3>Business Information</h3>
                 <p><strong>Legal Name:</strong> SK NADIM<br>
-                  <strong>Operating Address:</strong> Kestopur, Kolkata</p>
+                  <strong>Operating Area:</strong> Kestopur, Kolkata, West Bengal</p>
               </div>
               <div class="optech-contact-info">
                 <i class="ri-mail-fill"></i>
-                <h5>Contact</h5>
-<<<<<<< HEAD
-                <a href="mailto:info@nazora.tech">info@nazora.tech</a>
-                <a href="tel:9332016918">9332016918</a>
-=======
+                <h3>Contact</h3>
                 <a href="mailto:<?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars(site_company_name(), ENT_QUOTES, 'UTF-8'); ?></a>
-                <a href="tel:6297616918">+91-6297616918</a>
->>>>>>> b82b822 (chnages)
+                <a href="<?php echo site_phone_tel(); ?>"><?php echo site_phone_display(); ?></a>
               </div>
             </div>
           </div>
@@ -90,5 +93,5 @@
     </div>
   </div>
   <!-- End section -->
-  <script src="assets/js/contact-form.js"></script>
+  <script src="assets/js/contact-form.js?v=<?php echo (int) @filemtime(__DIR__ . '/assets/js/contact-form.js'); ?>" defer></script>
 <?php include 'footer.php'; ?>

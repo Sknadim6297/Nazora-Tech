@@ -49,7 +49,7 @@ html {
 }
 body {
     color: var(--body-color);
-    font-family: Sora, sans-serif;
+    font-family: "DM Sans", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     vertical-align: baseline;
@@ -303,7 +303,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: Sora, sans-serif;
+    font-family: "DM Sans", sans-serif;
     color: var(--heading-color);
     font-weight: 600;
     margin: 0;
@@ -2107,7 +2107,7 @@ button#optech-subscription-btn {
     padding: 22px 27.3px;
     border-radius: 6px;
     font-weight: 600;
-    font-family: Sora, sans-serif;
+    font-family: "DM Sans", sans-serif;
     width: fit-content;
     white-space: nowrap;
     text-overflow: ellipsis;

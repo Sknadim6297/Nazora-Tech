@@ -4,7 +4,7 @@
     <div class="container">
       <div class="nz-footer-top">
         <div class="nz-footer-col">
-          <h5>Product</h5>
+          <p class="nz-footer-heading">Product</p>
           <ul>
             <li><a href="service_details">Website Development</a></li>
             <li><a href="app_development_details">App Development</a></li>
@@ -15,50 +15,46 @@
           </ul>
         </div>
         <div class="nz-footer-col">
-          <h5>Resources</h5>
+          <p class="nz-footer-heading">Resources</p>
           <ul>
             <li><a href="portfolio">Portfolio</a></li>
-            <li><a href="about_us">Case Studies</a></li>
+            <li><a href="portfolio_details?slug=rc-logistics">Case Studies</a></li>
             <li><a href="service">Service Catalog</a></li>
           </ul>
         </div>
         <div class="nz-footer-col">
-          <h5>Support</h5>
+          <p class="nz-footer-heading">Support</p>
           <ul>
-            <li><a href="contact">Help Center</a></li>
-            <li><a href="contact">Ticket Support</a></li>
-            <li><a href="index#faq">FAQ</a></li>
+            <li><a href="contact">Request a Quote</a></li>
+            <li><a href="<?php echo site_phone_tel(); ?>">Call Support</a></li>
+            <li><a href="./#faq">FAQ</a></li>
             <li><a href="contact">Contact Us</a></li>
             <li><a href="<?php echo site_whatsapp_url(); ?>" target="_blank" rel="noopener">WhatsApp</a></li>
           </ul>
         </div>
         <div class="nz-footer-col">
-          <h5>Company</h5>
+          <p class="nz-footer-heading">Company</p>
           <ul>
             <li><a href="about_us">About Us</a></li>
             <li><a href="team">Our Team</a></li>
             <li><a href="careers">Careers</a></li>
-            <li><a href="contact">Legal Notices</a></li>
+            <li><a href="terms_and_conditions">Legal Notices</a></li>
           </ul>
         </div>
         <div class="nz-footer-news">
-          <p>Sign up for our newsletter to get updates, news, and free insight.</p>
-          <form class="nz-news-form" action="contact" method="get">
-            <input type="email" name="email" placeholder="Email" aria-label="Email" required>
-            <button type="submit"><i class="ri-mail-send-line"></i> SIGN UP</button>
-          </form>
+          <p>Have a project in mind? Send a short brief and get a clear next step from our Kolkata team.</p>
+          <a class="nz-news-cta" href="contact"><i class="ri-mail-send-line" aria-hidden="true"></i> Get a Free Quote</a>
           <div class="nz-social">
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
-            <a href="https://www.instagram.com/skonlineitsolutions?igsh=bTZ3ajRndDd4b2lw&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="ri-instagram-fill"></i></a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
             <a href="<?php echo site_whatsapp_url(); ?>" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="ri-whatsapp-fill"></i></a>
+            <a href="<?php echo site_phone_tel(); ?>" aria-label="Call Nazora Tech"><i class="ri-phone-fill"></i></a>
+            <a href="mailto:<?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?>" aria-label="Email Nazora Tech"><i class="ri-mail-fill"></i></a>
           </div>
         </div>
       </div>
 
       <div class="nz-footer-bottom">
-        <a class="brand" href="index">
-          <img src="assets/images/logo/nazora-logo.png" alt="<?php echo htmlspecialchars(site_company_name(), ENT_QUOTES, 'UTF-8'); ?>">
+        <a class="brand" href="./">
+          <img src="assets/images/logo/nazora-logo.webp" alt="<?php echo htmlspecialchars(site_company_name(), ENT_QUOTES, 'UTF-8'); ?> logo" width="434" height="198" loading="lazy" decoding="async">
         </a>
         <p>Copyright © <?php echo date('Y'); ?> <?php echo htmlspecialchars(site_company_name(), ENT_QUOTES, 'UTF-8'); ?>. All rights reserved.</p>
         <div class="legal">
@@ -69,6 +65,10 @@
           <a href="refund_policy">Refund Policy</a>
           <span>|</span>
           <a href="cancellation_policy">Cancellation Policy</a>
+          <?php if (site_ga4_id() !== '') : ?>
+          <span>|</span>
+          <a href="privacy_policy#analytics" data-consent-open>Cookie Settings</a>
+          <?php endif; ?>
         </div>
       </div>
     </div>
@@ -79,38 +79,31 @@
       <i class="ri-whatsapp-line"></i>
       <span>WhatsApp</span>
     </a>
-    <a class="floating-contact-btn floating-call-btn" href="tel:6297616918">
+    <a class="floating-contact-btn floating-call-btn" href="<?php echo site_phone_tel(); ?>">
       <i class="ri-phone-line"></i>
       <span>Call Now</span>
     </a>
   </div>
 
-
-
-
+  <?php if (site_ga4_id() !== '') : ?>
+  <div class="nz-consent" id="nz-consent" role="dialog" aria-live="polite" aria-label="Analytics cookie choice" hidden>
+    <p>We use Google Analytics cookies to see which pages help visitors. Your name, phone, and email are never sent. <a href="privacy_policy#analytics">Privacy Policy</a></p>
+    <div class="nz-consent-actions">
+      <button type="button" class="nz-consent-btn is-ghost" data-consent="denied">Decline</button>
+      <button type="button" class="nz-consent-btn" data-consent="granted">Accept</button>
+    </div>
+  </div>
+  <script>window.NZ_ANALYTICS = { id: <?php echo json_encode(site_ga4_id()); ?> };</script>
+  <script src="assets/js/nz-analytics.js?v=<?php echo (int) @filemtime(__DIR__ . '/assets/js/nz-analytics.js'); ?>" defer></script>
+  <?php endif; ?>
 
   <!-- scripts -->
   <script src="assets/js/jquery-3.7.1.min.js"></script>
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/menu/menu.js"></script>
-  <script src="assets/js/jquery.magnific-popup.min.js"></script>
-  <script src="assets/js/slick.js"></script>
-  <script src="assets/js/countdown.js"></script>
-  <script src="assets/js/skillbar.js"></script>
-  <script src="assets/js/slick-animation.js"></script>
-  <script src="assets/js/slick-animation.min.js"></script>
   <script src="assets/js/faq.js"></script>
-  <script src="assets/js/isotope.pkgd.min.js"></script>
-  <script src="assets/js/tabs-slider.js"></script>
-  <script src="assets/js/product-increment.js"></script>
-  <script src="assets/js/top-to-bottom.js"></script>
-  <script src="assets/js/aos.js"></script>
-  <?php if (!empty($loadGoogleMaps)) : ?>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyArZVfNvjnLNwJZlLJKuOiWHZ6vtQzzb1Y" async defer></script>
-  <?php endif; ?>
-
-  <script src="assets/js/app.js"></script>
-  <script src="assets/js/nz-reveal.js"></script>
+  <script src="assets/js/top-to-bottom.js?v=<?php echo (int) @filemtime(__DIR__ . '/assets/js/top-to-bottom.js'); ?>"></script>
+  <script src="assets/js/app.js?v=<?php echo (int) @filemtime(__DIR__ . '/assets/js/app.js'); ?>"></script>
+  <script src="assets/js/nz-reveal.js?v=<?php echo (int) @filemtime(__DIR__ . '/assets/js/nz-reveal.js'); ?>"></script>
   <script>
     (function ($) {
       function hidePreloader() {

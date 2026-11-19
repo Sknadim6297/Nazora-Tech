@@ -127,7 +127,7 @@ body.nazora-home [data-aos] {
   box-sizing: border-box;
   background:
     linear-gradient(105deg, rgba(7, 16, 28, 0.96) 0%, rgba(11, 21, 38, 0.82) 42%, rgba(11, 21, 38, 0.35) 72%, rgba(11, 21, 38, 0.15) 100%),
-    url("../images/hero/hero-bg2.png") center / cover no-repeat;
+    url("../images/hero/hero-bg2.webp") center / cover no-repeat;
 }
 
 .nz-hero::after {
@@ -199,6 +199,7 @@ body.nazora-home [data-aos] {
   text-align: center;
 }
 
+.nz-trust-card h2,
 .nz-trust-card h3 {
   margin: 0 0 22px;
   color: var(--nz-ink);
@@ -298,6 +299,7 @@ body.nazora-home [data-aos] {
   display: block;
 }
 
+.nz-tool-card h3,
 .nz-tool-card h4 {
   margin: 0 0 10px;
   font-size: 1.2rem;
@@ -361,6 +363,7 @@ body.nazora-home [data-aos] {
   font-size: 30px;
 }
 
+.nz-industry-item h3,
 .nz-industry-item h4 {
   margin: 0 0 10px;
   color: var(--nz-ink);
@@ -603,6 +606,164 @@ body.nazora-home [data-aos] {
 .nz-bars span:nth-child(6) { height: 66%; }
 .nz-bars span:nth-child(7) { height: 44%; }
 
+.nz-dash-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #15803d !important;
+  font-weight: 600;
+}
+
+.nz-dash-live i {
+  font-size: 8px;
+}
+
+.nz-dash-shot {
+  position: relative;
+  display: block;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--nz-soft);
+  box-shadow: 0 0 0 1px #e6ebf2;
+  text-decoration: none;
+}
+
+.nz-dash-browser {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 10px;
+  background: #eef2f8;
+}
+
+.nz-dash-browser i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c9d2df;
+}
+
+.nz-dash-browser em {
+  margin-left: 8px;
+  color: var(--nz-muted);
+  font-size: 10px;
+  font-style: normal;
+}
+
+.nz-dash-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 579;
+  object-fit: cover;
+}
+
+.nz-dash-caption {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(11, 21, 38, 0.86);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.nz-dash-shot:hover .nz-dash-caption {
+  background: var(--nz-red);
+}
+
+.nz-dash-prices {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.nz-dash-prices li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--nz-muted);
+}
+
+.nz-dash-prices strong {
+  color: var(--nz-ink);
+}
+
+.nz-dash-steps {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  counter-reset: nzstep;
+}
+
+/* Leave room for the decorative phone, which only shows on desktop */
+@media (min-width: 992px) {
+  .nz-dash .nz-dash-cards {
+    grid-template-columns: 1fr;
+    margin-right: 150px;
+  }
+}
+
+@media (max-width: 575px) {
+  .nz-dash {
+    padding: 14px;
+    min-height: 0;
+  }
+
+  .nz-dash-frame {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .nz-dash-side {
+    display: none;
+  }
+
+  .nz-dash-main .hello {
+    flex-wrap: wrap;
+    gap: 4px 10px;
+  }
+
+  .nz-dash .nz-dash-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nz-dash-steps li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--nz-ink);
+  counter-increment: nzstep;
+}
+
+.nz-dash-steps li::before {
+  content: counter(nzstep);
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--nz-navy);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.nz-dash-steps li:last-child::before {
+  background: var(--nz-red);
+}
+
 .nz-phone {
   position: absolute;
   right: 18px;
@@ -702,6 +863,7 @@ body.nazora-home [data-aos] {
   object-fit: contain;
 }
 
+.nz-addon-card h3,
 .nz-addon-card h4 {
   margin: 0 0 8px;
   color: var(--nz-ink);
@@ -762,6 +924,7 @@ body.nazora-home [data-aos] {
   flex-direction: column;
 }
 
+.nz-scale-card h3,
 .nz-scale-card h4 {
   margin: 0 0 8px;
   color: var(--nz-ink);
@@ -836,6 +999,7 @@ body.nazora-home [data-aos] {
   font-size: 0.98rem;
 }
 
+.nz-testi-card h3,
 .nz-testi-card h5 {
   margin: 0 0 4px;
   color: var(--nz-ink);
@@ -865,6 +1029,63 @@ body.nazora-home [data-aos] {
 
 .nz-dots i.is-on {
   background: var(--nz-red);
+}
+
+/* ——— Why Choose Nazora Tech (replaces placeholder testimonials) ——— */
+.nz-pillars-section {
+  background: var(--nz-soft);
+}
+
+.nz-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.nz-pillar-card {
+  background: #fff;
+  border: 1px solid var(--nz-line);
+  border-radius: var(--nz-radius);
+  padding: 28px 24px;
+  box-shadow: var(--nz-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nz-pillar-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(196, 30, 58, 0.1);
+  color: var(--nz-red);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.nz-pillar-card h3 {
+  margin: 0;
+  color: var(--nz-ink);
+  font-size: 1.12rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.nz-pillar-card p {
+  margin: 0;
+  color: var(--nz-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.nz-pillars-foot {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
 }
 
 /* ——— Download / project CTA ——— */
@@ -1287,7 +1508,7 @@ body.nazora-home .optech-footer-section.footer-v5,
     padding-top: calc(var(--nz-header-h) + 8px);
     background:
       linear-gradient(180deg, rgba(7, 16, 28, 0.94) 0%, rgba(11, 21, 38, 0.88) 100%),
-      url("../images/hero/hero-bg2.png") center / cover no-repeat;
+      url("../images/hero/hero-bg2.webp") center / cover no-repeat;
   }
 
   .nz-hero-inner {
@@ -1320,6 +1541,10 @@ body.nazora-home .optech-footer-section.footer-v5,
     grid-template-columns: 1fr 1fr;
   }
 
+  .nz-pillars-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .nz-download-visual {
     min-height: 0;
   }
@@ -1330,7 +1555,8 @@ body.nazora-home .optech-footer-section.footer-v5,
     margin-top: -28px;
   }
 
-  .nz-start-grid {
+  .nz-start-grid,
+  .nz-pillars-grid {
     grid-template-columns: 1fr;
   }
 

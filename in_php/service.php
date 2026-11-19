@@ -1,11 +1,18 @@
-<?php include 'header.php'; ?>
+<?php
+require_once __DIR__ . '/includes/site_config.php';
+$pageBreadcrumbs = [
+  ['name' => 'Home', 'url' => site_url('')],
+  ['name' => 'Services', 'url' => site_url('service')],
+];
+include 'header.php';
+?>
 
   <div class="optech-breadcrumb nz-breadcrumb">
     <div class="container">
-      <h1 class="post__title">Our Services</h1>
-      <nav class="breadcrumbs">
+      <h1 class="post__title">Web, App &amp; Software Services in Kolkata</h1>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
         <ul>
-          <li><a href="index">Home</a></li>
+          <li><a href="./">Home</a></li>
           <li aria-current="page">Our Services</li>
         </ul>
       </nav>
@@ -18,7 +25,7 @@
         <div>
           <span class="nz-kicker">What we offer</span>
           <h2 class="nz-title">Digital products built for businesses that want a clear result</h2>
-          <p class="nz-about-lead">Nazora Tech designs and builds websites, mobile apps, business software, and automation from our studio in Kolkata. Every project starts with the outcome you need, then we choose the right product, timeline, and support plan.</p>
+          <p class="nz-about-lead">Nazora Tech designs and builds websites, mobile apps, business software, and automation from our studio in Kestopur, Kolkata — serving businesses in Salt Lake, New Town, Kolkata, West Bengal, and across India. Check our <a href="pricing">starting pricing</a> or browse <a href="portfolio">recent work</a>.</p>
           <div class="nz-about-actions">
             <a class="nz-header-btn" href="contact">Get a free quote</a>
             <a class="nz-about-link" href="about_us">About Nazora Tech</a>
@@ -32,21 +39,21 @@
               <div>
                 <strong>A written scope</strong>
                 <span>Goals, pages or features, timeline, and price before work starts.</span>
-              </div>
+            </div>
             </li>
             <li>
               <i class="ri-chat-1-line"></i>
               <div>
                 <strong>Visible progress</strong>
                 <span>Regular updates so you can review the work while it is being built.</span>
-              </div>
+            </div>
             </li>
             <li>
               <i class="ri-shield-check-line"></i>
               <div>
                 <strong>Launch and aftercare</strong>
                 <span>Testing before go-live, then practical support once the product is in use.</span>
-              </div>
+          </div>
             </li>
           </ul>
         </aside>
@@ -65,7 +72,7 @@
         <article class="nz-offer-card">
           <div class="nz-svc-icon"><i class="ri-window-line"></i></div>
           <h3>Website Design &amp; Development</h3>
-          <p>Business websites and landing pages that explain your offer and turn visitors into enquiries.</p>
+          <p>An affordable website developer in Kestopur and Kolkata building business sites that explain your offer and bring enquiries.</p>
           <ul>
             <li>Corporate sites, landing pages, and redesigns</li>
             <li>Mobile-friendly layout and clear calls to action</li>
@@ -76,7 +83,7 @@
         <article class="nz-offer-card">
           <div class="nz-svc-icon"><i class="ri-smartphone-line"></i></div>
           <h3>App Development</h3>
-          <p>Android and iOS apps with a simple user flow, a secure backend, and room to add features later.</p>
+          <p>Mobile app development in Kolkata for Android and iOS with a clean user flow, secure backend, and room to scale.</p>
           <ul>
             <li>Customer apps and internal team apps</li>
             <li>Accounts, notifications, and admin control</li>
@@ -87,7 +94,7 @@
         <article class="nz-offer-card">
           <div class="nz-svc-icon"><i class="ri-database-2-line"></i></div>
           <h3>Software Solutions</h3>
-          <p>Custom systems that replace scattered sheets and manual follow-ups with one working tool.</p>
+          <p>Custom software development services for Salt Lake, New Town, and Kolkata teams replacing scattered sheets with one tool.</p>
           <ul>
             <li>CRM, ERP, and operations dashboards</li>
             <li>Role-based access for your team</li>
@@ -98,7 +105,7 @@
         <article class="nz-offer-card">
           <div class="nz-svc-icon"><i class="ri-megaphone-line"></i></div>
           <h3>Digital Marketing</h3>
-          <p>Search and campaign support that brings the right people to a site that can actually convert them.</p>
+          <p>Local SEO and campaign support that brings qualified Kolkata and West Bengal visitors to a conversion-ready site.</p>
           <ul>
             <li>SEO setup and on-page improvements</li>
             <li>Content direction for services and locations</li>
@@ -109,7 +116,7 @@
         <article class="nz-offer-card">
           <div class="nz-svc-icon"><i class="ri-robot-2-line"></i></div>
           <h3>AI Automation</h3>
-          <p>Practical automation for the repetitive work around leads, replies, and internal handoffs.</p>
+          <p>Practical AI automation services in Kolkata for repetitive work around lead handling, replies, and internal handoffs.</p>
           <ul>
             <li>Lead capture and follow-up flows</li>
             <li>Chat and enquiry routing</li>

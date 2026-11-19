@@ -1,15 +1,19 @@
 <?php
 require_once __DIR__ . '/includes/careers_app.php';
 $jobs = careers_published();
+$pageBreadcrumbs = [
+  ['name' => 'Home', 'url' => site_url('')],
+  ['name' => 'Careers', 'url' => site_url('careers')],
+];
 include 'header.php';
 ?>
 
   <div class="optech-breadcrumb nz-breadcrumb">
     <div class="container">
-      <h1 class="post__title">Careers</h1>
-      <nav class="breadcrumbs">
+      <h1 class="post__title">Careers at Nazora Tech</h1>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
         <ul>
-          <li><a href="index">Home</a></li>
+          <li><a href="./">Home</a></li>
           <li aria-current="page">Careers</li>
         </ul>
       </nav>

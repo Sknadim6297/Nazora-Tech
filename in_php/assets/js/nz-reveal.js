@@ -6,7 +6,7 @@
     return;
   }
 
-  var SKIP = "header, footer, form, nav, .nz-preloader, .paginacontainer, .optech-sidemenu-wraper, .nz-sidemenu, .offcanves-menu, .floating-contact-actions, .menu-block, .menu-block-wrapper, .mobile-menu-head";
+  var SKIP = "header, footer, form, nav, .nz-preloader, .paginacontainer, .optech-sidemenu-wraper, .nz-sidemenu, .offcanves-menu, .floating-contact-actions, .nz-consent, .menu-block, .menu-block-wrapper, .mobile-menu-head";
   var UNIT = [
     "article",
     ".nz-tool-card",
@@ -25,6 +25,9 @@
     ".nz-trust-card",
     ".nz-price-card",
     ".nz-work-card",
+    ".nz-pillar-card",
+    ".nz-svc-mini",
+    ".nz-svc-case",
     ".nz-svc-fit-list article",
     ".nz-about-values article",
     ".nz-about-stats-grid > div",

@@ -1,11 +1,18 @@
-<?php include 'header.php'; ?>
+<?php
+require_once __DIR__ . '/includes/site_config.php';
+$pageBreadcrumbs = [
+  ['name' => 'Home', 'url' => site_url('')],
+  ['name' => 'About Us', 'url' => site_url('about_us')],
+];
+include 'header.php';
+?>
 
   <div class="optech-breadcrumb nz-breadcrumb">
     <div class="container">
-      <h1 class="post__title">About Us</h1>
-      <nav class="breadcrumbs">
+      <h1 class="post__title">About Nazora Tech</h1>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
         <ul>
-          <li><a href="index">Home</a></li>
+          <li><a href="./">Home</a></li>
           <li aria-current="page">About Us</li>
         </ul>
       </nav>
@@ -32,7 +39,7 @@
               <i class="ri-map-pin-2-line"></i>
               <div>
                 <strong>Based in Kolkata</strong>
-                <span>Local conversations, with delivery for clients across India.</span>
+                <span>Serving Kestopur, Salt Lake, New Town, Kolkata, West Bengal, and clients across India.</span>
               </div>
             </li>
             <li>
@@ -62,58 +69,16 @@
     </div>
   </section>
 
-<<<<<<< HEAD
-	<div class="section large-padding-tb4 overflow-hidden">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="optech-thumb extra-mr">
-						<img data-aos="fade-up" data-aos-duration="600" src="assets/images/v2/thumb1.png" alt="">
-						<div class="optech-thumb-position" data-aos="fade-up" data-aos-duration="800">
-							<img src="assets/images/v2/thumb2.png" alt="">
-						</div>
-						<div class="optech-shape1">
-							<img src="assets/images/shape/shape1.svg" alt="">
-						</div>
-						<div class="optech-shape2">
-							<img src="assets/images/shape/shape2.svg" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 d-flex align-items-center">
-					<div class="optech-default-content ml40">
-						<h2>Your Complete IT & Service Solution Partner</h2>
-					<p><?php echo htmlspecialchars(site_company_name(), ENT_QUOTES, 'UTF-8'); ?> is a Kolkata-based technology partner delivering websites, mobile apps, software platforms, and AI automation for businesses that want clear results.</p>
-						<p>Founded with a focus on practical delivery, we've helped 100+ clients move from idea to launch with transparent pricing, fast communication, and long-term support.</p>
-						<div class="optech-contact-info-column">
-							<div class="optech-contact-info">
-								<h5>Business Information</h5>
-								<p><strong>Legal Name:</strong> SK NADIM<br>
-								<strong>Operating Address:</strong> Kestopur, Kolkata<br>
-								<strong>Email:</strong> <a href="mailto:info@nazora.tech">info@nazora.tech</a><br>
-								<strong>Phone:</strong> <a href="tel:9332016918">9332016918</a></p>
-							</div>
-						</div>
-						<div class="optech-extra-mt">
-							<a class='optech-default-btn' data-text='Get In Touch' href='contact'><span class="btn-wraper">Get In Touch</span></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End section -->
-=======
   <section class="nz-about-stats">
     <div class="container">
       <div class="nz-about-stats-grid">
         <div>
-          <strong>100+</strong>
-          <span>Clients supported from idea to launch</span>
+          <strong>3</strong>
+          <span>Founder and partners you work with directly</span>
         </div>
         <div>
-          <strong>5+</strong>
-          <span>Years building digital products</span>
+          <strong>₹1,999</strong>
+          <span>Starting monthly plan for a business website</span>
         </div>
         <div>
           <strong>4</strong>
@@ -126,7 +91,6 @@
       </div>
     </div>
   </section>
->>>>>>> b82b822 (chnages)
 
   <section class="nz-about-block">
     <div class="container">
@@ -254,7 +218,8 @@
   <section class="nz-about-block nz-about-block--soft nz-consult">
     <div class="container">
       <div class="nz-consult-card nz-about-consult">
-        <form class="nz-form" action="send_email.php" method="POST">
+        <form class="nz-form" action="send_email.php" method="POST" data-form-id="about_consult">
+          <div class="nz-hp" aria-hidden="true"><label>Website <input type="text" name="company_website" tabindex="-1" autocomplete="off"></label></div>
           <div class="row-fields">
             <input type="text" name="name" placeholder="Your name" required>
             <input type="tel" name="phone" placeholder="Phone number" required>
@@ -277,7 +242,7 @@
           <p>Share a short brief. We reply with a practical next step, a timeline range, and the right way to start.</p>
           <ul class="nz-about-contact-list">
             <li><i class="ri-map-pin-2-fill"></i> Kestopur, Kolkata, India</li>
-            <li><i class="ri-phone-fill"></i> <a href="tel:6297616918">+91-6297616918</a></li>
+            <li><i class="ri-phone-fill"></i> <a href="<?php echo site_phone_tel(); ?>"><?php echo site_phone_display(); ?></a></li>
             <li><i class="ri-mail-fill"></i> <a href="mailto:<?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars(site_company_name(), ENT_QUOTES, 'UTF-8'); ?></a></li>
           </ul>
         </div>
@@ -297,6 +262,6 @@
     </div>
   </section>
 
-  <script src="assets/js/contact-form.js"></script>
+  <script src="assets/js/contact-form.js?v=<?php echo (int) @filemtime(__DIR__ . '/assets/js/contact-form.js'); ?>" defer></script>
 
 <?php include 'footer.php'; ?>

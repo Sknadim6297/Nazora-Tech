@@ -1,11 +1,18 @@
-<?php include 'header.php'; ?>
+<?php
+require_once __DIR__ . '/includes/site_config.php';
+$pageBreadcrumbs = [
+  ['name' => 'Home', 'url' => site_url('')],
+  ['name' => 'Pricing Plans', 'url' => site_url('pricing')],
+];
+include 'header.php';
+?>
 
   <div class="optech-breadcrumb nz-breadcrumb">
     <div class="container">
-      <h1 class="post__title">Pricing Plans</h1>
-      <nav class="breadcrumbs">
+      <h1 class="post__title">Website, App &amp; Software Pricing</h1>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
         <ul>
-          <li><a href="index">Home</a></li>
+          <li><a href="./">Home</a></li>
           <li aria-current="page">Pricing Plans</li>
         </ul>
       </nav>
@@ -17,7 +24,7 @@
       <div class="nz-head-center">
         <span class="nz-kicker">Nazora Tech</span>
         <h2 class="nz-title">Clear starting prices for websites, apps, and software</h2>
-        <p class="nz-lead">Choose a starting plan, then we confirm the final quote after a short look at your scope. Websites begin at ₹1,999, apps at ₹7,999, and software at ₹4,999.</p>
+        <p class="nz-lead">Choose an affordable starting plan from our Kestopur, Kolkata studio, then we confirm the final quote after reviewing your scope. Websites begin at ₹1,999, apps at ₹7,999, and software at ₹4,999 across Kolkata, Salt Lake, New Town, and India.</p>
       </div>
       <div class="nz-price-starts">
         <div>
@@ -262,27 +269,27 @@
       </div>
       <div class="faq-accordion init-wrap nz-price-faq">
         <div class="faq-item open">
-          <h5 class="init-header">Are these the final prices?</h5>
+          <h3 class="init-header">Are these the final prices?</h3>
           <div class="init-body">
             <p>These are starting prices. Websites begin at ₹1,999 a month, apps at ₹7,999, and software at ₹4,999. After we understand the pages, screens, or modules you need, we send a fixed quote.</p>
           </div>
         </div>
         <div class="faq-item">
-          <h5 class="init-header">What is included in a website plan?</h5>
+          <h3 class="init-header">What is included in a website plan?</h3>
           <div class="init-body">
             <p>Design, build, a mobile layout, a contact path, and basic setup so the site can go live. Higher plans add more pages, SEO setup, and a longer support window.</p>
           </div>
         </div>
         <div class="faq-item">
-          <h5 class="init-header">Why do apps and software use a one-time price?</h5>
+          <h3 class="init-header">Why do apps and software use a one-time price?</h3>
           <div class="init-body">
             <p>The first release is scoped and built once. Support after launch is included for the period on the plan. Extra features after that are quoted separately.</p>
           </div>
         </div>
         <div class="faq-item">
-          <h5 class="init-header">How do we start?</h5>
+          <h3 class="init-header">How do we start?</h3>
           <div class="init-body">
-            <p>Send a short note from the contact page with the service you want. We reply with the right plan, a timeline range, and the next step.</p>
+            <p>Send a short note from the <a href="contact">contact page</a> with the service you want. We reply with the right plan, a timeline range, and the next step.</p>
           </div>
         </div>
       </div>

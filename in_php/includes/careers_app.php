@@ -127,9 +127,18 @@ function careers_apply_href(string $applyUrl): string
     if ($applyUrl === '' || strcasecmp($applyUrl, 'contact') === 0) {
         return 'contact';
     }
-    if (preg_match('#^https?://#i', $applyUrl) || str_starts_with($applyUrl, 'mailto:')) {
+    if (preg_match('#^https?://#i', $applyUrl) && filter_var($applyUrl, FILTER_VALIDATE_URL)) {
+        return $applyUrl;
+    }
+    if (str_starts_with(strtolower($applyUrl), 'mailto:')) {
+        $addr = substr($applyUrl, 7);
+        if (filter_var($addr, FILTER_VALIDATE_EMAIL)) {
+            return 'mailto:' . $addr;
+        }
+    }
+    if (preg_match('/^[a-zA-Z0-9_.\-\/?=&%]+$/', $applyUrl) && !str_contains($applyUrl, '//')) {
         return $applyUrl;
     }
 
-    return $applyUrl;
+    return 'contact';
 }

@@ -1,0 +1,11 @@
+# Composer dependencies (installed cleanly on deploy or via composer install --no-dev)
+/vendor/
+
+# Private server configuration & personal data: never commit
+/storage/config.local.php
+nazora-config.php
+/storage/submissions/*
+/storage/backups/
+/storage/*.sqlite-journal
+/storage/*.sqlite-wal
+/storage/*.sqlite-shm

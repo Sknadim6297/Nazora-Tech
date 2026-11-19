@@ -5,6 +5,12 @@ terminals
 agent-transcripts
 .cursor
 **/node_modules
+vendor
+nazora-config.php
+storage/config.local.php
 storage/blog.sqlite
+storage/blog.sqlite-*
+storage/submissions/*
+storage/backups
 storage/uploads/**
 !storage/uploads/.gitkeep

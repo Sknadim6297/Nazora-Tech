@@ -18,6 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($email === '' || $password === '') {
             $errors[] = 'Email and password are required.';
+        } elseif (blog_login_is_throttled($email)) {
+            http_response_code(429);
+            $errors[] = 'Too many failed sign-in attempts. Please wait 15 minutes and try again.';
         } elseif (blog_login($email, $password)) {
             blog_flash('success', 'Welcome back. You are now signed in.');
             header('Location: dashboard.php');

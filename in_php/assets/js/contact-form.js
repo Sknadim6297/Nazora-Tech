@@ -1,12 +1,15 @@
 // Contact form validation and submission
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Find all contact forms
-    const forms = document.querySelectorAll('form');
+    // Only enquiry forms that post to the mail handler
+    const forms = document.querySelectorAll('form[action$="send_email.php"]');
     
     forms.forEach(form => {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
+            if (form.dataset.sending === '1') {
+                return;
+            }
             handleFormSubmit(form);
         });
     });
@@ -99,9 +102,13 @@ function handleFormSubmit(form) {
         formData.append('service', service);
     }
     formData.append('message', message);
+    const honeypot = form.querySelector('[name="company_website"]');
+    formData.append('company_website', honeypot ? honeypot.value : '');
+    formData.append('form_id', form.getAttribute('data-form-id') || 'website');
     
     // Show loading state
     const originalText = submitBtn.innerHTML;
+    form.dataset.sending = '1';
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="btn-wraper">Sending...</span>';
     
@@ -113,7 +120,15 @@ function handleFormSubmit(form) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            showNotification(data.message, 'success');
+            // "stored" means saved for the team but not emailed; the server message says so
+            showNotification(data.message, 'success', data.delivery === 'stored' ? 9000 : 5000);
+            // Analytics hook: category only, never the visitor's details
+            document.dispatchEvent(new CustomEvent('nz:lead', {
+                detail: {
+                    formId: form.getAttribute('data-form-id') || 'contact',
+                    service: service
+                }
+            }));
             // Clear form
             form.reset();
             // Remove error highlights
@@ -132,6 +147,7 @@ function handleFormSubmit(form) {
     })
     .finally(() => {
         // Restore button
+        delete form.dataset.sending;
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
     });
@@ -165,7 +181,7 @@ function removeError(field) {
 }
 
 // Show notification
-function showNotification(message, type) {
+function showNotification(message, type, duration) {
     // Remove existing notification
     const existing = document.querySelector('.form-notification');
     if (existing) {
@@ -183,7 +199,7 @@ function showNotification(message, type) {
         color: white;
         border-radius: 5px;
         z-index: 9999;
-        max-width: 400px;
+        max-width: min(400px, calc(100vw - 40px));
         font-size: 14px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         animation: slideIn 0.3s ease-in-out;
@@ -194,11 +210,13 @@ function showNotification(message, type) {
     notification.textContent = message;
     document.body.appendChild(notification);
     
-    // Auto remove after 5 seconds
+    notification.setAttribute('role', type === 'success' ? 'status' : 'alert');
+
+    // Auto remove after the display time (default 5 seconds)
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease-in-out';
         setTimeout(() => notification.remove(), 300);
-    }, 5000);
+    }, duration || 5000);
 }
 
 // Add animations

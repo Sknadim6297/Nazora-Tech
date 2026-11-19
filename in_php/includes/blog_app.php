@@ -1,12 +1,50 @@
 <?php
 
+// Admin session idle timeout (seconds) and login throttling limits
+const BLOG_ADMIN_IDLE_TIMEOUT = 7200;
+const BLOG_LOGIN_WINDOW = 900;
+const BLOG_LOGIN_MAX_PER_ACCOUNT = 5;
+const BLOG_LOGIN_MAX_PER_IP = 20;
+const BLOG_UPLOAD_MAX_BYTES = 5242880;
+
 if (!defined('BLOG_APP_BOOTSTRAPPED')) {
     define('BLOG_APP_BOOTSTRAPPED', true);
 
     require_once __DIR__ . '/site_config.php';
 
-    if (session_status() === PHP_SESSION_NONE) {
+    // Sessions are only needed for the admin panel; public pages stay cookie-free and cacheable
+    $blogScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? ''));
+    if (strpos($blogScript, '/admin/') !== false && session_status() === PHP_SESSION_NONE) {
+        $blogHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+            || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
+        ini_set('session.use_strict_mode', '1');
+        ini_set('session.use_only_cookies', '1');
+        session_set_cookie_params([
+            'lifetime' => 0,
+            'path' => '/',
+            'secure' => $blogHttps,
+            'httponly' => true,
+            'samesite' => 'Lax',
+        ]);
         session_start();
+
+        // Admin pages hold private data: never cache or index them
+        if (!headers_sent()) {
+            header('Cache-Control: no-store, no-cache, must-revalidate, private');
+            header('Pragma: no-cache');
+            header('X-Robots-Tag: noindex, nofollow');
+        }
+
+        // Sign out after a period of inactivity
+        if (isset($_SESSION['blog_user'])) {
+            $blogLastActivity = (int) ($_SESSION['blog_last_activity'] ?? time());
+            if (time() - $blogLastActivity > BLOG_ADMIN_IDLE_TIMEOUT) {
+                unset($_SESSION['blog_user'], $_SESSION['blog_csrf_token'], $_SESSION['blog_last_activity']);
+                session_regenerate_id(true);
+            } else {
+                $_SESSION['blog_last_activity'] = time();
+            }
+        }
     }
 
     date_default_timezone_set('Asia/Kolkata');
@@ -120,6 +158,7 @@ function blog_db(): PDO
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $pdo->exec('PRAGMA foreign_keys = ON');
+    $pdo->exec('PRAGMA busy_timeout = 5000');
 
     blog_init_schema($pdo);
 
@@ -259,7 +298,8 @@ function blog_seed_defaults(PDO $pdo): void
         $stmt->execute([
             ':name' => 'Administrator',
             ':email' => 'admin@snfteam.local',
-            ':password_hash' => password_hash('Admin@12345', PASSWORD_DEFAULT),
+            // Only used when the users table is empty (first boot). Set ADMIN_INITIAL_PASSWORD on the host to avoid the default.
+            ':password_hash' => password_hash((string) (site_env('ADMIN_INITIAL_PASSWORD') ?: 'Admin@12345'), PASSWORD_DEFAULT),
             ':role' => 'admin',
             ':created_at' => $now,
             ':updated_at' => $now,
@@ -327,6 +367,79 @@ function blog_require_login(): void
     }
 }
 
+/**
+ * Client address for throttling. The hosting proxy appends the real address last.
+ */
+function blog_client_ip(): string
+{
+    $forwarded = array_filter(array_map('trim', explode(',', (string) ($_SERVER['HTTP_X_FORWARDED_FOR'] ?? ''))));
+
+    return $forwarded ? (string) end($forwarded) : (string) ($_SERVER['REMOTE_ADDR'] ?? 'unknown');
+}
+
+function blog_login_attempts_table(PDO $pdo): void
+{
+    static $ready = false;
+    if ($ready) {
+        return;
+    }
+    // Stores only one-way hashes and timestamps, never the email or password typed
+    $pdo->exec('CREATE TABLE IF NOT EXISTS admin_login_attempts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        key_hash TEXT NOT NULL,
+        attempted_at INTEGER NOT NULL
+    )');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_login_attempts_key ON admin_login_attempts(key_hash, attempted_at)');
+    $ready = true;
+}
+
+function blog_login_keys(string $email): array
+{
+    $ip = blog_client_ip();
+
+    return [
+        'account' => hash('sha256', 'acct|' . $ip . '|' . strtolower(trim($email))),
+        'ip' => hash('sha256', 'ip|' . $ip),
+    ];
+}
+
+function blog_login_is_throttled(string $email): bool
+{
+    $pdo = blog_db();
+    blog_login_attempts_table($pdo);
+    $keys = blog_login_keys($email);
+    $since = time() - BLOG_LOGIN_WINDOW;
+
+    $stmt = $pdo->prepare('SELECT COUNT(*) FROM admin_login_attempts WHERE key_hash = :key AND attempted_at > :since');
+    $stmt->execute([':key' => $keys['account'], ':since' => $since]);
+    if ((int) $stmt->fetchColumn() >= BLOG_LOGIN_MAX_PER_ACCOUNT) {
+        return true;
+    }
+    $stmt->execute([':key' => $keys['ip'], ':since' => $since]);
+
+    return (int) $stmt->fetchColumn() >= BLOG_LOGIN_MAX_PER_IP;
+}
+
+function blog_login_record_failure(string $email): void
+{
+    $pdo = blog_db();
+    blog_login_attempts_table($pdo);
+    $now = time();
+    $insert = $pdo->prepare('INSERT INTO admin_login_attempts (key_hash, attempted_at) VALUES (:key, :at)');
+    foreach (blog_login_keys($email) as $key) {
+        $insert->execute([':key' => $key, ':at' => $now]);
+    }
+    $pdo->prepare('DELETE FROM admin_login_attempts WHERE attempted_at < :old')->execute([':old' => $now - 86400]);
+    error_log('[admin] Failed sign-in attempt');
+}
+
+function blog_login_clear_failures(string $email): void
+{
+    $pdo = blog_db();
+    blog_login_attempts_table($pdo);
+    $pdo->prepare('DELETE FROM admin_login_attempts WHERE key_hash = :key')->execute([':key' => blog_login_keys($email)['account']]);
+}
+
 function blog_login(string $email, string $password): bool
 {
     $pdo = blog_db();
@@ -334,9 +447,21 @@ function blog_login(string $email, string $password): bool
     $stmt->execute([':email' => $email]);
     $user = $stmt->fetch();
 
-    if (!$user || !password_verify($password, $user['password_hash'])) {
+    if (!$user) {
+        // Equalise timing so response time does not reveal whether the account exists
+        password_verify($password, password_hash(bin2hex(random_bytes(8)), PASSWORD_DEFAULT));
+        blog_login_record_failure($email);
+
         return false;
     }
+
+    if (!password_verify($password, $user['password_hash'])) {
+        blog_login_record_failure($email);
+
+        return false;
+    }
+
+    blog_login_clear_failures($email);
 
     $now = blog_now();
     $pdo->prepare('UPDATE users SET last_login_at = :last_login_at, updated_at = :updated_at WHERE id = :id')->execute([
@@ -345,19 +470,29 @@ function blog_login(string $email, string $password): bool
         ':id' => $user['id'],
     ]);
 
+    // New session id on privilege change prevents session fixation
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        session_regenerate_id(true);
+    }
+
     $_SESSION['blog_user'] = [
         'id' => (int) $user['id'],
         'name' => $user['name'],
         'email' => $user['email'],
         'role' => $user['role'],
     ];
+    $_SESSION['blog_last_activity'] = time();
+    unset($_SESSION['blog_csrf_token']);
 
     return true;
 }
 
 function blog_logout(): void
 {
-    unset($_SESSION['blog_user'], $_SESSION['blog_csrf_token']);
+    unset($_SESSION['blog_user'], $_SESSION['blog_csrf_token'], $_SESSION['blog_last_activity']);
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        session_regenerate_id(true);
+    }
 }
 
 function blog_unique_slug(PDO $pdo, string $table, string $slug, ?int $ignoreId = null): string
@@ -714,8 +849,18 @@ function blog_store_image(array $file, string $group = 'blog'): ?string
         'image/gif' => 'gif',
     ];
 
+    if ((int) ($file['size'] ?? 0) > BLOG_UPLOAD_MAX_BYTES || (int) @filesize($file['tmp_name']) > BLOG_UPLOAD_MAX_BYTES) {
+        return null;
+    }
+
     $mime = blog_detect_image_mime($file);
     if (!isset($allowedMimes[$mime])) {
+        return null;
+    }
+
+    // Must be a real, decodable image (rejects polyglots and renamed scripts)
+    $imageInfo = @getimagesize($file['tmp_name']);
+    if ($imageInfo === false || empty($imageInfo['mime']) || !isset($allowedMimes[strtolower((string) $imageInfo['mime'])])) {
         return null;
     }
 

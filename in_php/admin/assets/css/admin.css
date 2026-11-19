@@ -1,4 +1,23 @@
 /* Nazora TECH Admin — navy + red theme */
+
+/* DM Sans (variable, self-hosted from the site's assets/fonts folder) */
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 100 1000;
+  font-display: swap;
+  src: url("../../../assets/fonts/dm-sans-latin-ext-opsz.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 100 1000;
+  font-display: swap;
+  src: url("../../../assets/fonts/dm-sans-latin-opsz.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   --adm-bg: #f3f5f9;
   --adm-surface: #ffffff;
@@ -20,7 +39,7 @@
   --adm-radius-sm: 10px;
   --adm-shadow: 0 1px 3px rgba(11, 21, 38, 0.06), 0 8px 24px rgba(11, 21, 38, 0.06);
   --adm-shadow-lg: 0 20px 50px rgba(11, 21, 38, 0.12);
-  --adm-font: "Poppins", system-ui, -apple-system, sans-serif;
+  --adm-font: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --adm-sidebar-w: 280px;
   --adm-header-h: 72px;
 }
@@ -975,6 +994,202 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 8px;
 }
 
+/* ─── Enquiries (lead management) ─── */
+.admin-nav-badge {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: var(--adm-primary);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: inline-grid;
+  place-items: center;
+}
+
+.admin-nav-link.is-active .admin-nav-badge { background: #fff; color: var(--adm-primary-dark); }
+
+a.admin-stat { color: inherit; }
+
+.status-pill.enquiry-new { color: var(--adm-primary); background: var(--adm-primary-soft); }
+.status-pill.enquiry-contacted { color: #2563eb; background: rgba(37, 99, 235, 0.12); }
+.status-pill.enquiry-qualified { color: var(--adm-success); background: rgba(22, 163, 74, 0.12); }
+.status-pill.enquiry-closed { color: var(--adm-muted); background: rgba(100, 116, 139, 0.14); }
+
+.enquiry-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.enquiry-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--adm-border);
+  background: var(--adm-surface-2);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--adm-muted);
+}
+
+.enquiry-tab span {
+  min-width: 22px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--adm-surface);
+  font-size: 0.72rem;
+  text-align: center;
+}
+
+.enquiry-tab:hover { color: var(--adm-text); border-color: var(--adm-primary); }
+.enquiry-tab.is-active { background: var(--adm-primary); border-color: var(--adm-primary); color: #fff; }
+.enquiry-tab.is-active span { color: var(--adm-primary-dark); }
+
+.admin-filter-bar .enquiry-date { min-width: 150px; flex: 0 1 170px; }
+
+.admin-table tbody tr.enquiry-row--new td:first-child { box-shadow: inset 3px 0 0 var(--adm-primary); }
+
+.enquiry-break { word-break: break-word; overflow-wrap: anywhere; }
+
+.enquiry-mail-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  color: var(--adm-warning);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.enquiry-retention {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.enquiry-retention .form-select,
+.enquiry-retention .form-control { flex: 1 1 220px; }
+
+.admin-notice {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  border-radius: var(--adm-radius-sm);
+  border: 1px solid var(--adm-border);
+  background: var(--adm-surface);
+}
+
+.admin-notice > i { font-size: 1.5rem; color: var(--adm-primary); }
+.admin-notice > div { flex: 1 1 260px; }
+.admin-notice p { font-size: 0.85rem; color: var(--adm-muted); }
+.admin-notice--warning { border-color: rgba(217, 119, 6, 0.35); background: rgba(245, 158, 11, 0.08); }
+.admin-notice--warning > i { color: var(--adm-warning); }
+
+.admin-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--adm-muted);
+}
+
+.admin-back-link:hover { color: var(--adm-primary); }
+
+.enquiry-detail { align-items: start; }
+
+.enquiry-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0 0 20px;
+}
+
+.enquiry-fields dt,
+.enquiry-meta dt {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--adm-muted);
+}
+
+.enquiry-fields dd { margin: 2px 0 0; font-weight: 600; }
+
+.enquiry-meta { margin: 0; }
+.enquiry-meta dd { margin: 2px 0 12px; font-weight: 600; overflow-wrap: anywhere; word-break: break-word; }
+.enquiry-meta dd:last-child { margin-bottom: 0; }
+.admin-card-body code { overflow-wrap: anywhere; word-break: break-word; }
+
+.enquiry-subhead {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--adm-muted);
+  margin-bottom: 8px;
+}
+
+.enquiry-message {
+  padding: 16px 18px;
+  border-radius: var(--adm-radius-sm);
+  background: var(--adm-surface-2);
+  border: 1px solid var(--adm-border);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+}
+
+.enquiry-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.enquiry-notes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.enquiry-notes li {
+  padding: 12px 14px;
+  border-radius: var(--adm-radius-sm);
+  border: 1px solid var(--adm-border);
+  background: var(--adm-surface);
+}
+
+.enquiry-notes li.is-system { background: var(--adm-surface-2); border-style: dashed; }
+.enquiry-notes li.is-system .enquiry-note-body { color: var(--adm-muted); font-size: 0.85rem; }
+
+.enquiry-note-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.78rem;
+  margin-bottom: 4px;
+}
+
+.enquiry-note-meta span { color: var(--adm-muted); }
+.enquiry-note-body { overflow-wrap: anywhere; }
+
+.enquiry-danger .admin-card-head h3 { color: var(--adm-danger); }
+
+.system-list { padding-left: 18px; margin-bottom: 12px; }
+.system-list code { color: var(--adm-primary); }
+
 /* ─── Responsive ─── */
 @media (max-width: 1199px) {
   .admin-stats { grid-template-columns: repeat(2, 1fr); }
@@ -1013,4 +1228,14 @@ a { color: inherit; text-decoration: none; }
   .admin-login-hero { display: none; }
   .btn-action .action-label { display: none; }
   .btn-action { padding: 8px; min-width: 34px; }
+  .enquiry-fields { grid-template-columns: 1fr; }
+  .admin-filter-bar .enquiry-date { flex: 1 1 140px; }
+  .admin-header { gap: 8px; padding: 0 12px; }
+  .admin-header-left { min-width: 0; gap: 8px; }
+  .admin-page-head { min-width: 0; }
+  .admin-page-head h1 { font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .admin-page-head p { display: none; }
+  .admin-header-right { gap: 6px; flex-shrink: 0; }
+  .admin-header-btn { height: 38px; padding: 0 10px; }
+  .admin-user { padding: 3px; }
 }

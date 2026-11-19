@@ -5,10 +5,15 @@ $pageTitle = $pageTitle ?? 'Admin Panel';
 $pageSubtitle = $pageSubtitle ?? 'Manage careers and site content.';
 $activeMenu = $activeMenu ?? '';
 
+require_once __DIR__ . '/../../includes/enquiries_app.php';
+$newEnquiryCount = enquiries_count_new();
+
 $navItems = [
     ['id' => 'dashboard', 'label' => 'Dashboard', 'href' => 'dashboard.php', 'icon' => 'ri-dashboard-3-line'],
+    ['id' => 'enquiries', 'label' => 'Enquiries', 'href' => 'enquiries.php', 'icon' => 'ri-mail-unread-line', 'badge' => $newEnquiryCount],
     ['id' => 'careers', 'label' => 'Careers', 'href' => 'careers.php', 'icon' => 'ri-briefcase-4-line'],
     ['id' => 'portfolio', 'label' => 'Portfolio', 'href' => 'portfolio.php', 'icon' => 'ri-gallery-line'],
+    ['id' => 'system', 'label' => 'System & Backup', 'href' => 'system.php', 'icon' => 'ri-shield-check-line'],
 ];
 ?>
 <!DOCTYPE html>
@@ -37,6 +42,9 @@ $navItems = [
               <a href="<?php echo blog_escape($item['href']); ?>" class="admin-nav-link<?php echo $activeMenu === $item['id'] ? ' is-active' : ''; ?>">
                 <span class="admin-nav-icon"><i class="<?php echo blog_escape($item['icon']); ?>"></i></span>
                 <span class="admin-nav-text"><?php echo blog_escape($item['label']); ?></span>
+                <?php if (!empty($item['badge'])) : ?>
+                  <span class="admin-nav-badge" title="New enquiries"><?php echo (int) $item['badge']; ?></span>
+                <?php endif; ?>
                 <i class="ri-arrow-right-s-line admin-nav-arrow"></i>
               </a>
             <?php endforeach; ?>
@@ -66,7 +74,7 @@ $navItems = [
             <i class="ri-lightbulb-flash-line"></i>
             <div>
               <strong>Pro tip</strong>
-              <p>Published career openings appear on the public Careers page.</p>
+              <p>Website enquiries land in Enquiries. Download a backup from System &amp; Backup regularly.</p>
             </div>
           </div>
         </div>
@@ -95,10 +103,13 @@ $navItems = [
               <small><?php echo blog_escape($currentUser['email'] ?? ''); ?></small>
             </div>
           </div>
-          <a class="admin-header-btn admin-header-btn--danger" href="logout.php" title="Logout">
-            <i class="ri-logout-box-r-line"></i>
-            <span class="d-none d-lg-inline">Logout</span>
-          </a>
+          <form method="post" action="logout.php" class="m-0">
+            <input type="hidden" name="csrf_token" value="<?php echo blog_escape(blog_csrf_token()); ?>">
+            <button class="admin-header-btn admin-header-btn--danger" type="submit" title="Logout">
+              <i class="ri-logout-box-r-line"></i>
+              <span class="d-none d-lg-inline">Logout</span>
+            </button>
+          </form>
         </div>
       </header>
 

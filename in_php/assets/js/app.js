@@ -48,12 +48,15 @@
     /*--------------------------------------------------------------
     optech STICKY MENU JS INIT
     --------------------------------------------------------------*/
+    var $stickyMenu = $('#sticky-menu');
+    var stickyTicking = false;
     $(window).on('scroll', function () {
-      if ($(window).scrollTop() > 50) {
-        $('#sticky-menu').addClass('sticky-menu');
-      } else {
-        $('#sticky-menu').removeClass('sticky-menu');
-      }
+      if (stickyTicking) return;
+      stickyTicking = true;
+      window.requestAnimationFrame(function () {
+        $stickyMenu.toggleClass('sticky-menu', window.pageYOffset > 50);
+        stickyTicking = false;
+      });
     });
 
     /*--------------------------------------------------------------
@@ -61,7 +64,7 @@
     --------------------------------------------------------------*/
     $(".optech-header-barger").on("click", function (e) {
       $(".optech-sidemenu-column, .offcanvas-overlay").addClass("active");
-      event.preventDefault(e);
+      e.preventDefault();
     });
     $(".optech-sidemenu-close, .offcanvas-overlay").on("click", function () {
       $(".optech-sidemenu-column, .offcanvas-overlay").removeClass("active");
@@ -395,9 +398,11 @@
     optech AOS ANIMATION JS INIT
     --------------------------------------------------------------*/
 
-    AOS.init({
-      once: true // Ensure animations can trigger multiple times
-    });
+    if (window.AOS) {
+      AOS.init({
+        once: true
+      });
+    }
   }); /*End document ready*/
 
   $(window).on("resize", function () {}); // end window resize
