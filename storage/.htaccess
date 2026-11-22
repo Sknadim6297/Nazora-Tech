@@ -1,0 +1,9 @@
+# Deny direct HTTP access to private storage (DB, config, logs).
+# Public media lives under /storage/uploads/ and is re-enabled there.
+
+<IfModule mod_authz_core.c>
+  Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+  Deny from all
+</IfModule>

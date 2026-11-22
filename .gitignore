@@ -1,4 +1,31 @@
+# Archives / OS junk
 in_php.zip
 *.zip
 .DS_Store
 Thumbs.db
+
+# Composer dependencies (install via composer install --no-dev on deploy)
+/vendor/
+
+# Private server configuration & secrets — never commit
+/storage/config.local.php
+nazora-config.php
+.env
+.env.*
+!.env.example
+
+# Runtime data
+/storage/submissions/*
+!/storage/submissions/.gitkeep
+/storage/backups/
+/storage/*.sqlite
+/storage/*.sqlite-journal
+/storage/*.sqlite-wal
+/storage/*.sqlite-shm
+/storage/uploads/**
+!/storage/uploads/.gitkeep
+!/storage/uploads/**/.gitkeep
+
+# Logs
+*.log
+/storage/logs/

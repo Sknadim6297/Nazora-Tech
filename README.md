@@ -28,46 +28,45 @@ This repository contains the company's PHP-based corporate website, designed to 
 
 ## Project Structure
 
+Website source lives at the repository root (no `in_php/` wrapper):
+
 ```text
 Nazora-Tech/
-└── in_php/
-    ├── admin/
-    ├── assets/
-    ├── includes/
-    ├── storage/
-    ├── index.php
-    ├── about_us.php
-    ├── service.php
-    ├── service_details.php
-    ├── portfolio.php
-    ├── portfolio_details.php
-    ├── pricing.php
-    ├── blog.php
-    ├── blog_details.php
-    ├── careers.php
-    ├── contact.php
-    ├── send_email.php
-    ├── privacy_policy.php
-    ├── terms_and_conditions.php
-    ├── Dockerfile
-    └── .htaccess
+├── admin/
+├── assets/
+├── includes/
+├── storage/          # runtime data; mostly gitignored
+├── tools/            # local QA helpers (optional)
+├── index.php
+├── about_us.php
+├── service.php
+├── portfolio.php
+├── pricing.php
+├── contact.php
+├── sitemap.php
+├── robots.php
+├── Dockerfile
+├── .htaccess
+└── README.md
 ```
 
-## Business Services
+## Local development (XAMPP)
 
-Nazora Tech focuses on providing digital solutions, including:
+1. Clone or open this repository under `htdocs` (for example `C:\xampp\htdocs\SNF_TEAM`).
+2. Run `composer install` in the repo root if `vendor/` is missing.
+3. Open `http://localhost/SNF_TEAM/` (path matches the folder name under `htdocs`).
+4. Optional secrets: copy `includes/config.local.example.php` to `storage/config.local.php` and fill real values only on your machine.
 
-- Website and web application development
-- Mobile application development
-- Custom software development
-- AI-powered applications and automation
-- Digital marketing services
+URL helpers (`site_url`, `site_base_path`) detect the subdirectory automatically, so local subfolder installs keep working without hardcoded `/in_php/` paths.
 
 ## Deployment
 
-The repository includes a Dockerfile and Docker-related configuration for container-based deployment.
+- Point the web document root at this repository root (`index.php`, `.htaccess`, `assets/`, etc.).
+- On Hostinger, upload the site files into `public_html` (or the domain root), not into an `in_php/` subfolder.
+- Prefer secrets in `nazora-config.php` one level above the web root, or in gitignored `storage/config.local.php`.
+- The repository includes a Dockerfile for container-based deployment (domain-root document root).
 
-Deployment settings, environment variables, storage permissions, and server requirements should be verified before publishing the application.
+Deployment settings, environment variables, storage permissions, and server requirements should be verified before publishing. Do not commit real SMTP passwords, API keys, or database files.
 
 ## Security
 
@@ -75,10 +74,12 @@ Keep database credentials, API keys, email credentials, customer information, an
 
 Review the administrative section, file uploads, contact forms, and access controls before production deployment.
 
+Ignored by default: `vendor/`, `.env`, `storage/config.local.php`, `nazora-config.php`, SQLite databases, submission logs, and uploaded media under `storage/uploads/`.
+
 ## Project Status
 
 Company website with ongoing development and maintenance.
 
-## Copyright
+## License / Ownership
 
-Copyright © Nazora Tech. All rights reserved.
+Private company website for Nazora Tech / SK NADIM.
