@@ -4,9 +4,9 @@ $company = site_company_name();
 $currentPage = basename($_SERVER['PHP_SELF']);
 $seoMap = [
   'index.php' => [
-    'title' => $company . ' | Website, App & Software Development Company in Kolkata',
-    'description' => $company . ' is a Kolkata-based website, mobile app and custom software development company helping businesses build scalable digital solutions.',
-    'keywords' => 'Nazora Tech, website development company Kolkata, app development company Kolkata, software development company Kolkata, AI automation Kolkata'
+    'title' => $company . ' Kolkata | Website, App & Software Development Company',
+    'description' => $company . ' is an independent website, mobile app and custom software development company in Kestopur, Kolkata, West Bengal — building practical digital products for businesses across India.',
+    'keywords' => 'Nazora Tech, Nazora Tech Kolkata, website development company Kolkata, app development company Kolkata, software development company Kolkata, AI automation Kolkata'
   ],
   'about_us.php' => [
     'title' => 'About ' . $company . ' | Web & App Company Kolkata',
@@ -125,31 +125,43 @@ $webId = $homeUrl . '#website';
 
 $schemaNodes = [];
 if ($currentPage === 'index.php') {
+  $orgDescription = $company . ' is an independent website, mobile app and custom software development company based in Kestopur, Kolkata, West Bengal, India.';
   $schemaNodes[] = [
     '@type' => 'Organization',
     '@id' => $orgId,
     'name' => $company,
     'legalName' => 'SK NADIM',
-    'alternateName' => ['Nazora TECH', 'Nazora'],
+    // Prefer full brand forms — avoid bare "Nazora" which can blur into similarly spelled brands.
+    'alternateName' => ['Nazora TECH', 'Nazora Tech Kolkata'],
     'url' => $homeUrl,
     'logo' => [
       '@type' => 'ImageObject',
       'url' => $logoUrl,
+      'contentUrl' => $logoUrl,
       'width' => 434,
       'height' => 198,
+      'caption' => $company . ' logo',
     ],
     'image' => $logoUrl,
+    'description' => $orgDescription,
     'email' => site_contact_email(),
-    'telephone' => site_phone_display(),
+    'telephone' => SITE_PHONE_E164,
     'address' => [
       '@type' => 'PostalAddress',
-      'addressLocality' => 'Kestopur, Kolkata',
+      'streetAddress' => 'Kestopur',
+      'addressLocality' => 'Kolkata',
       'addressRegion' => 'West Bengal',
       'addressCountry' => 'IN',
     ],
+    'areaServed' => [
+      ['@type' => 'City', 'name' => 'Kolkata'],
+      ['@type' => 'State', 'name' => 'West Bengal'],
+      ['@type' => 'Country', 'name' => 'India'],
+    ],
     'contactPoint' => [
       '@type' => 'ContactPoint',
-      'telephone' => site_phone_display(),
+      'telephone' => SITE_PHONE_E164,
+      'email' => site_contact_email(),
       'contactType' => 'customer service',
       'areaServed' => 'IN',
       'availableLanguage' => ['English', 'Bengali', 'Hindi'],
@@ -159,16 +171,24 @@ if ($currentPage === 'index.php') {
     '@type' => 'ProfessionalService',
     '@id' => $bizId,
     'name' => $company,
+    'alternateName' => 'Nazora Tech Kolkata',
     'url' => $homeUrl,
     'image' => $logoUrl,
-    'description' => $company . ' is a Kolkata-based website, mobile app and custom software development company helping businesses build scalable digital solutions.',
+    'logo' => $logoUrl,
+    'description' => $orgDescription . ' Services include website development, mobile apps, custom software, digital marketing, and AI automation.',
     'email' => site_contact_email(),
-    'telephone' => site_phone_display(),
+    'telephone' => SITE_PHONE_E164,
     'priceRange' => '₹₹',
+    'brand' => [
+      '@type' => 'Brand',
+      'name' => $company,
+      'logo' => $logoUrl,
+    ],
     'parentOrganization' => ['@id' => $orgId],
     'address' => [
       '@type' => 'PostalAddress',
-      'addressLocality' => 'Kestopur, Kolkata',
+      'streetAddress' => 'Kestopur',
+      'addressLocality' => 'Kolkata',
       'addressRegion' => 'West Bengal',
       'addressCountry' => 'IN',
     ],
@@ -199,6 +219,7 @@ if ($currentPage === 'index.php') {
     '@type' => 'WebSite',
     '@id' => $webId,
     'name' => $company,
+    'alternateName' => 'Nazora Tech Kolkata',
     'url' => $homeUrl,
     'publisher' => ['@id' => $orgId],
     'inLanguage' => 'en-IN',
@@ -393,7 +414,7 @@ if (!empty($pageServiceSchema) && is_array($pageServiceSchema)) {
           <div class="optech-header-info">
             <ul>
               <li><a href="<?php echo site_phone_tel(); ?>"><i class="ri-phone-fill"></i><?php echo site_phone_display(); ?></a></li>
-              <li><a href="mailto:<?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?>"><i class="ri-mail-fill"></i><?php echo htmlspecialchars(site_company_name(), ENT_QUOTES, 'UTF-8'); ?></a></li>
+              <li><a href="mailto:<?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?>"><i class="ri-mail-fill"></i><?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?></a></li>
             </ul>
           </div>
         </div>
@@ -527,7 +548,7 @@ if (!empty($pageServiceSchema) && is_array($pageServiceSchema)) {
           <div class="optech-contact-info">
             <i class="ri-mail-fill"></i>
             <p class="nz-side-heading">Contact</p>
-            <a href="mailto:<?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars(site_company_name(), ENT_QUOTES, 'UTF-8'); ?></a>
+            <a href="mailto:<?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars(site_contact_email(), ENT_QUOTES, 'UTF-8'); ?></a>
             <a href="<?php echo site_phone_tel(); ?>"><?php echo site_phone_display(); ?></a>
           </div>
         </div>

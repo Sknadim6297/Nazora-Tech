@@ -45,12 +45,21 @@ foreach ($pages as $file) {
 }
 
 $index = file_get_contents($root . '/index.php');
-if (!preg_match('/<h1>\s*Website, App &amp; Software Development Company in Kolkata\s*<\/h1>/', $index)
-    && !preg_match('/<h1>\s*Website, App & Software Development Company in Kolkata\s*<\/h1>/', $index)) {
-    issue($issues, 'high', 'h1', 'Homepage H1 does not match required Kolkata heading');
+$header = file_get_contents($root . '/header.php');
+if (!preg_match('/<h1>[^<]*Nazora Tech[^<]*Software Development Company in Kolkata\s*<\/h1>/u', $index)) {
+    issue($issues, 'high', 'h1', 'Homepage H1 must include Nazora Tech + Kolkata company heading');
 }
 if (!preg_match('/nz-hero-brand[^>]*>\s*Nazora Tech\s*</', $index)) {
     issue($issues, 'medium', 'brand', 'Homepage brand tagline Nazora Tech missing or changed');
+}
+if (preg_match('/Nazara/i', $index . $header)) {
+    issue($issues, 'high', 'brand', 'Incorrect brand spelling Nazara found in homepage or header metadata');
+}
+if (strpos($header, 'Nazora Tech Kolkata') === false) {
+    issue($issues, 'medium', 'brand', 'alternateName Nazora Tech Kolkata missing from schema');
+}
+if (preg_match("/'alternateName'\\s*=>\\s*\\[[^\\]]*['\"]Nazora['\"]\\s*[,\\]]/s", $header)) {
+    issue($issues, 'medium', 'brand', 'Bare alternateName "Nazora" weakens brand entity clarity');
 }
 
 // --- robots.php ---
@@ -92,7 +101,6 @@ foreach ($locs as $loc) {
 }
 
 // --- Title uniqueness from seoMap in header.php ---
-$header = file_get_contents($root . '/header.php');
 if (strpos($header, "'blog.php'") === false && strpos($header, '"blog.php"') === false) {
     issue($issues, 'medium', 'meta', 'blog.php missing from header.php SEO map');
 } else {

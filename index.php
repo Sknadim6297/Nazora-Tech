@@ -9,8 +9,8 @@ include 'header.php';
     <div class="container">
       <div class="nz-hero-inner">
         <p class="nz-hero-brand">Nazora Tech</p>
-        <h1>Website, App &amp; Software Development Company in Kolkata</h1>
-        <p class="nz-hero-lead">Custom websites, mobile apps, software platforms, and AI automation for businesses in Kolkata and across India — built to grow with clarity and speed.</p>
+        <h1>Nazora Tech — Website, App &amp; Software Development Company in Kolkata</h1>
+        <p class="nz-hero-lead">Nazora Tech is a Kolkata-based studio for custom websites, mobile apps, software platforms, and AI automation — built for businesses across West Bengal and India with clear scope and practical delivery.</p>
         <div class="nz-hero-actions">
           <a class="optech-default-btn optech-white-btn" data-text="Discover More" href="service"><span class="btn-wraper">Discover More</span></a>
           <a class="optech-default-btn nz-btn-red" data-text="Free Consultation" href="contact"><span class="btn-wraper">Free Consultation</span></a>
@@ -63,7 +63,7 @@ include 'header.php';
   <section class="nz-section nz-tools">
     <div class="container">
       <div class="nz-head-center">
-        <h2 class="nz-title">Fuel Your Digital Future with Nazora's Cutting-Edge Tools</h2>
+        <h2 class="nz-title">Fuel Your Digital Future with Nazora Tech's Tools</h2>
         <p class="nz-lead">Strategy, design, and engineering in one team — so your product ships faster and performs longer.</p>
       </div>
       <div class="nz-tool-grid">
@@ -147,7 +147,7 @@ include 'header.php';
       <div class="nz-why-grid">
         <div class="nz-why-copy">
           <span class="nz-kicker">Why Choose Us</span>
-          <h2 class="nz-title">Your Digital Compass: Nazora Guides the Way</h2>
+          <h2 class="nz-title">Your Digital Compass: Nazora Tech Guides the Way</h2>
           <p>We combine strategy, design, development, and support so projects stay focused, faster, and easier to manage from kickoff to launch.</p>
           <ul class="nz-check-list">
             <li>
@@ -309,7 +309,7 @@ include 'header.php';
       <div class="nz-head-center">
         <span class="nz-kicker is-light">Business Scale</span>
         <h2 class="nz-title">Tailored Digital Solutions for Every Stage of Business Growth</h2>
-        <p class="nz-lead">Whether you are launching, expanding, or running multi-branch operations — Nazora scales with you.</p>
+        <p class="nz-lead">Whether you are launching, expanding, or running multi-branch operations — Nazora Tech scales with you.</p>
       </div>
       <div class="nz-scale-grid nz-scale-grid--premium">
         <article class="nz-scale-card">
@@ -407,7 +407,7 @@ include 'header.php';
       <div class="nz-download-banner">
         <div class="nz-download-copy">
           <span class="nz-kicker is-light">Start Your Project</span>
-          <h2>Navigating Growth, Elevating Businesses: <em>Nazora's Path to Success</em></h2>
+          <h2>Navigating Growth, Elevating Businesses: <em>Nazora Tech's Path to Success</em></h2>
           <a class="nz-solid-btn" href="contact">Get a Free Quote →</a>
         </div>
         <div class="nz-download-visual" aria-hidden="true">
@@ -470,6 +470,12 @@ include 'header.php';
       </div>
       <div class="faq-accordion init-wrap">
         <div class="faq-item open" id="faq">
+          <h3 class="init-header">Who is Nazora Tech?</h3>
+          <div class="init-body">
+            <p>Nazora Tech is an independent website, app and software development company based in Kestopur, Kolkata, West Bengal. We help businesses across India with websites, mobile apps, custom software, digital marketing, and AI automation.</p>
+          </div>
+        </div>
+        <div class="faq-item">
           <h3 class="init-header">Do you build custom websites and business apps?</h3>
           <div class="init-body">
             <p>Yes. We build custom websites, mobile apps, and internal software systems that match your goals and budget.</p>
