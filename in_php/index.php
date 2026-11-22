@@ -4,20 +4,29 @@ $pagePreloadImage = 'assets/images/hero/hero-bg2.webp';
 include 'header.php';
 ?>
 
-  <section class="nz-hero">
+  <section class="nz-hero" id="nz-top">
+    <div class="nz-hero-media" aria-hidden="true"></div>
     <div class="container">
       <div class="nz-hero-inner">
+        <p class="nz-hero-brand">Nazora Tech</p>
         <h1>Website, App &amp; Software Development Company in Kolkata</h1>
-        <p>Custom websites, mobile apps, software platforms, and AI automation for businesses in Kolkata and across India — built to grow with clarity and speed.</p>
+        <p class="nz-hero-lead">Custom websites, mobile apps, software platforms, and AI automation for businesses in Kolkata and across India — built to grow with clarity and speed.</p>
         <div class="nz-hero-actions">
           <a class="optech-default-btn optech-white-btn" data-text="Discover More" href="service"><span class="btn-wraper">Discover More</span></a>
           <a class="optech-default-btn nz-btn-red" data-text="Free Consultation" href="contact"><span class="btn-wraper">Free Consultation</span></a>
+          <a class="nz-hero-wa" href="<?php echo site_whatsapp_url(); ?>" target="_blank" rel="noopener">
+            <i class="ri-whatsapp-fill" aria-hidden="true"></i>
+            <span>WhatsApp</span>
+          </a>
         </div>
       </div>
     </div>
+    <a class="nz-hero-scroll" href="#nz-start" aria-label="Scroll to next section">
+      <span></span>
+    </a>
   </section>
 
-  <section class="nz-trust">
+  <section class="nz-trust" id="nz-start">
     <div class="container">
       <div class="nz-trust-card">
         <h2>A practical path from a short brief to a live product</h2>
@@ -26,25 +35,25 @@ include 'header.php';
             <em>01</em>
             <strong>Share the goal</strong>
             <p>Send a note or a WhatsApp message. We only ask what we need for the first version.</p>
-            <span>Start a brief</span>
+            <span>Start a brief <i class="ri-arrow-right-line" aria-hidden="true"></i></span>
           </a>
           <a class="nz-start-step" href="pricing">
             <em>02</em>
             <strong>See a starting plan</strong>
             <p>Websites from ₹1,999, apps from ₹7,999, and software from ₹4,999. The quote follows the scope.</p>
-            <span>View pricing</span>
+            <span>View pricing <i class="ri-arrow-right-line" aria-hidden="true"></i></span>
           </a>
           <a class="nz-start-step" href="portfolio">
             <em>03</em>
             <strong>Review real work</strong>
             <p>Open case studies for websites, apps, software, and brand marks before you decide.</p>
-            <span>Open portfolio</span>
+            <span>Open portfolio <i class="ri-arrow-right-line" aria-hidden="true"></i></span>
           </a>
           <a class="nz-start-step" href="<?php echo site_whatsapp_url(); ?>" target="_blank" rel="noopener">
             <em>04</em>
             <strong>Talk to the team</strong>
             <p>Ask a question on WhatsApp and get a clear next step from the Kolkata studio.</p>
-            <span>Chat on WhatsApp</span>
+            <span>Chat on WhatsApp <i class="ri-arrow-right-line" aria-hidden="true"></i></span>
           </a>
         </div>
       </div>
@@ -88,45 +97,42 @@ include 'header.php';
         <p class="nz-lead">From retail floors to professional firms — we tailor digital products to the way each industry sells, serves, and scales.</p>
       </div>
       <div class="nz-industry-grid">
-        <div class="nz-industry-item">
+        <a class="nz-industry-item" href="service">
           <div class="nz-icon-circle"><i class="ri-shopping-cart-2-line"></i></div>
           <h3>Retail</h3>
           <p>Storefronts, inventory flows, and customer journeys that keep checkout and operations aligned.</p>
-          <a class="nz-outline-btn" href="service">Learn More</a>
-        </div>
-        <div class="nz-industry-item">
+          <span class="nz-outline-btn">Learn More</span>
+        </a>
+        <a class="nz-industry-item" href="service">
           <div class="nz-icon-circle"><i class="ri-briefcase-4-line"></i></div>
           <h3>Professional Services</h3>
           <p>Client portals, booking systems, and reporting tools that reduce admin and raise trust.</p>
-          <a class="nz-outline-btn" href="service">Learn More</a>
-        </div>
-        <div class="nz-industry-item">
+          <span class="nz-outline-btn">Learn More</span>
+        </a>
+        <a class="nz-industry-item" href="service">
           <div class="nz-icon-circle"><i class="ri-restaurant-2-line"></i></div>
           <h3>Food &amp; Beverage</h3>
           <p>Ordering, menus, delivery coordination, and brand sites built for busy service teams.</p>
-          <a class="nz-outline-btn" href="service">Learn More</a>
-        </div>
-      </div>
-
-      <div class="nz-industry-grid" style="margin-top:36px">
-        <div class="nz-industry-item">
+          <span class="nz-outline-btn">Learn More</span>
+        </a>
+        <a class="nz-industry-item" href="service">
           <div class="nz-icon-circle"><i class="ri-graduation-cap-line"></i></div>
           <h3>Education</h3>
           <p>Learning platforms, student portals, and content systems that keep cohorts engaged.</p>
-          <a class="nz-outline-btn" href="service">Learn More</a>
-        </div>
-        <div class="nz-industry-item">
+          <span class="nz-outline-btn">Learn More</span>
+        </a>
+        <a class="nz-industry-item" href="service">
           <div class="nz-icon-circle"><i class="ri-flashlight-line"></i></div>
           <h3>Energy &amp; Utilities</h3>
           <p>Dashboards, field workflows, and customer portals for complex operational data.</p>
-          <a class="nz-outline-btn" href="service">Learn More</a>
-        </div>
-        <div class="nz-industry-item">
+          <span class="nz-outline-btn">Learn More</span>
+        </a>
+        <a class="nz-industry-item" href="service">
           <div class="nz-icon-circle"><i class="ri-line-chart-line"></i></div>
           <h3>Financial Services</h3>
           <p>Secure reporting, client onboarding, and insight tools with compliance-minded design.</p>
-          <a class="nz-outline-btn" href="service">Learn More</a>
-        </div>
+          <span class="nz-outline-btn">Learn More</span>
+        </a>
       </div>
 
       <div class="nz-industry-cta">
@@ -175,17 +181,17 @@ include 'header.php';
           </ul>
         </div>
 
-        <div class="nz-dash">
+        <div class="nz-dash nz-dash--premium">
           <div class="nz-dash-frame">
             <aside class="nz-dash-side" aria-hidden="true">
               <img class="logo-mini" src="assets/images/logo/nazora-logo.png" alt="" width="434" height="198" loading="lazy" decoding="async">
-              <ul>
-                <li class="active">Website</li>
-                <li>App</li>
-                <li>Software</li>
-                <li>SEO</li>
-                <li>AI</li>
-                <li>Support</li>
+              <ul class="nz-dash-nav" data-nz-dash-nav>
+                <li class="active" data-label="Website"><i class="ri-window-line"></i><span>Website</span></li>
+                <li data-label="App"><i class="ri-smartphone-line"></i><span>App</span></li>
+                <li data-label="Software"><i class="ri-code-s-slash-line"></i><span>Software</span></li>
+                <li data-label="SEO"><i class="ri-search-eye-line"></i><span>SEO</span></li>
+                <li data-label="AI"><i class="ri-robot-2-line"></i><span>AI</span></li>
+                <li data-label="Support"><i class="ri-customer-service-2-line"></i><span>Support</span></li>
               </ul>
             </aside>
             <div class="nz-dash-main">
@@ -205,9 +211,9 @@ include 'header.php';
                 <div class="nz-mini-card">
                   <div class="label">Starting plans</div>
                   <ul class="nz-dash-prices">
-                    <li><span>Website</span><strong>₹1,999/mo</strong></li>
-                    <li><span>App</span><strong>₹7,999</strong></li>
-                    <li><span>Software</span><strong>₹4,999</strong></li>
+                    <li><span><i class="ri-global-line" aria-hidden="true"></i> Website</span><strong>₹1,999/mo</strong></li>
+                    <li><span><i class="ri-smartphone-line" aria-hidden="true"></i> App</span><strong>₹7,999</strong></li>
+                    <li><span><i class="ri-cpu-line" aria-hidden="true"></i> Software</span><strong>₹4,999</strong></li>
                   </ul>
                 </div>
                 <div class="nz-mini-card">
@@ -223,21 +229,12 @@ include 'header.php';
               </div>
             </div>
           </div>
-          <div class="nz-phone" aria-hidden="true">
-            <div class="nz-phone-screen">
-              <div class="nz-phone-card">
-                <div>Nazora Tech</div>
-                <div class="num" style="margin:8px 0;font-weight:700">Your business app</div>
-                <div>Android &middot; iOS</div>
-              </div>
-              <div class="nz-phone-icons">
-                <i class="ri-smartphone-line"></i>
-                <i class="ri-file-list-3-line"></i>
-                <i class="ri-send-plane-line"></i>
-                <i class="ri-customer-service-2-line"></i>
-              </div>
-              <div class="nz-phone-tiles"><span></span><span></span></div>
-            </div>
+          <div class="nz-phone nz-phone--premium" aria-hidden="true">
+            <picture>
+              <source srcset="assets/images/home/mockup-app-phone.webp" type="image/webp">
+              <img src="assets/images/home/mockup-app-phone.jpg" alt="" width="720" height="1280" loading="lazy" decoding="async">
+            </picture>
+            <p class="nz-phone-note">Conceptual app preview</p>
           </div>
         </div>
       </div>
@@ -250,37 +247,57 @@ include 'header.php';
         <span class="nz-kicker">Extra Addons</span>
         <h2 class="nz-title">Enhance Your Experience with Powerful Addons</h2>
       </div>
-      <div class="nz-addon-grid">
+      <div class="nz-addon-grid nz-addon-grid--premium">
         <article class="nz-addon-card">
-          <img src="assets/images/v2/illustration1.svg" alt="Team access controls" width="140" height="140" loading="lazy" decoding="async">
-          <div>
+          <div class="nz-addon-media">
+            <picture>
+              <source srcset="assets/images/home/addon-team.webp" type="image/webp">
+              <img src="assets/images/home/addon-team.jpg" alt="Conceptual illustration of team access roles and collaborator controls" width="1152" height="864" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="nz-addon-copy">
             <h3>Team Access</h3>
             <p>Add collaborators, roles, and client logins so every stakeholder stays aligned without extra tools.</p>
-            <a class="nz-addon-link" href="service">Learn More</a>
+            <a class="nz-addon-link" href="service">Learn More →</a>
           </div>
         </article>
         <article class="nz-addon-card">
-          <img src="assets/images/v2/illustration2.svg" alt="CRM and payment integrations" width="140" height="140" loading="lazy" decoding="async">
-          <div>
+          <div class="nz-addon-media">
+            <picture>
+              <source srcset="assets/images/home/addon-integrations.webp" type="image/webp">
+              <img src="assets/images/home/addon-integrations.jpg" alt="Conceptual 3D illustration of CRM, API, payments and analytics integrations" width="1152" height="864" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="nz-addon-copy">
             <h3>Post Integrations</h3>
             <p>Connect CRM, WhatsApp, payment gateways, and analytics so your stack works as one system.</p>
-            <a class="nz-addon-link" href="service">Learn More</a>
+            <a class="nz-addon-link" href="service">Learn More →</a>
           </div>
         </article>
         <article class="nz-addon-card">
-          <img src="assets/images/v2/illustration3.svg" alt="Business profitability dashboards" width="140" height="140" loading="lazy" decoding="async">
-          <div>
+          <div class="nz-addon-media">
+            <picture>
+              <source srcset="assets/images/home/addon-profit.webp" type="image/webp">
+              <img src="assets/images/home/addon-profit.jpg" alt="Conceptual 3D illustration of profitability and analytics dashboards" width="1152" height="864" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="nz-addon-copy">
             <h3>Profitability Report</h3>
             <p>Live dashboards that surface revenue, costs, and growth signals your leadership can act on.</p>
-            <a class="nz-addon-link" href="service">Learn More</a>
+            <a class="nz-addon-link" href="service">Learn More →</a>
           </div>
         </article>
         <article class="nz-addon-card">
-          <img src="assets/images/v2/illustration4.svg" alt="Order and inventory workflows" width="140" height="140" loading="lazy" decoding="async">
-          <div>
+          <div class="nz-addon-media">
+            <picture>
+              <source srcset="assets/images/home/addon-orders.webp" type="image/webp">
+              <img src="assets/images/home/addon-orders.jpg" alt="Conceptual 3D illustration of order, inventory and fulfilment management" width="1152" height="864" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="nz-addon-copy">
             <h3>Manage Orders</h3>
             <p>Order, inventory, and fulfilment flows designed for retail and service businesses that move fast.</p>
-            <a class="nz-addon-link" href="service">Learn More</a>
+            <a class="nz-addon-link" href="service">Learn More →</a>
           </div>
         </article>
       </div>
@@ -294,9 +311,11 @@ include 'header.php';
         <h2 class="nz-title">Tailored Digital Solutions for Every Stage of Business Growth</h2>
         <p class="nz-lead">Whether you are launching, expanding, or running multi-branch operations — Nazora scales with you.</p>
       </div>
-      <div class="nz-scale-grid">
+      <div class="nz-scale-grid nz-scale-grid--premium">
         <article class="nz-scale-card">
-          <picture><source srcset="assets/images/v3/service1.webp" type="image/webp"><img src="assets/images/v3/service1.png" alt="Startup web and MVP packages" width="612" height="760" loading="lazy" decoding="async"></picture>
+          <div class="nz-scale-media">
+            <picture><source srcset="assets/images/home/scale-startup.webp" type="image/webp"><img src="assets/images/home/scale-startup.jpg" alt="Startup team collaborating on a digital product" width="1152" height="864" loading="lazy" decoding="async"></picture>
+          </div>
           <div class="body">
             <h3>Startup</h3>
             <p>Launch-ready websites and MVPs with clear pricing and fast iteration.</p>
@@ -304,7 +323,9 @@ include 'header.php';
           </div>
         </article>
         <article class="nz-scale-card">
-          <picture><source srcset="assets/images/v3/service2.webp" type="image/webp"><img src="assets/images/v3/service2.png" alt="Small and micro business digital solutions" width="612" height="760" loading="lazy" decoding="async"></picture>
+          <div class="nz-scale-media">
+            <picture><source srcset="assets/images/home/scale-smb.webp" type="image/webp"><img src="assets/images/home/scale-smb.jpg" alt="Small business owner using digital software tools" width="1152" height="864" loading="lazy" decoding="async"></picture>
+          </div>
           <div class="body">
             <h3>Small &amp; Micro Business</h3>
             <p>Practical tools for sales, branding, and day-to-day digital presence.</p>
@@ -312,7 +333,9 @@ include 'header.php';
           </div>
         </article>
         <article class="nz-scale-card">
-          <picture><source srcset="assets/images/v3/service3.webp" type="image/webp"><img src="assets/images/v3/service3.png" alt="Medium enterprise custom software" width="612" height="760" loading="lazy" decoding="async"></picture>
+          <div class="nz-scale-media">
+            <picture><source srcset="assets/images/home/scale-enterprise.webp" type="image/webp"><img src="assets/images/home/scale-enterprise.jpg" alt="Enterprise team planning software integrations" width="1152" height="864" loading="lazy" decoding="async"></picture>
+          </div>
           <div class="body">
             <h3>Medium Enterprise</h3>
             <p>Custom software, integrations, and reporting for growing teams.</p>
@@ -320,7 +343,9 @@ include 'header.php';
           </div>
         </article>
         <article class="nz-scale-card">
-          <picture><source srcset="assets/images/v3/service4.webp" type="image/webp"><img src="assets/images/v3/service4.png" alt="Multi-branch centralized business systems" width="612" height="760" loading="lazy" decoding="async"></picture>
+          <div class="nz-scale-media">
+            <picture><source srcset="assets/images/home/scale-multibranch.webp" type="image/webp"><img src="assets/images/home/scale-multibranch.jpg" alt="Manager reviewing multi-location operations on a dashboard" width="1152" height="864" loading="lazy" decoding="async"></picture>
+          </div>
           <div class="body">
             <h3>Multi-Branch</h3>
             <p>Centralized systems that keep locations, data, and teams in sync.</p>
@@ -377,34 +402,20 @@ include 'header.php';
     </div>
   </section>
 
-  <section class="nz-download">
+  <section class="nz-download nz-download--premium">
     <div class="container">
       <div class="nz-download-banner">
-        <div>
+        <div class="nz-download-copy">
           <span class="nz-kicker is-light">Start Your Project</span>
-          <h2>Navigating Growth, Elevating Businesses: Nazora's Path to Success</h2>
-          <a class="nz-solid-btn" href="contact">Get a Free Quote</a>
+          <h2>Navigating Growth, Elevating Businesses: <em>Nazora's Path to Success</em></h2>
+          <a class="nz-solid-btn" href="contact">Get a Free Quote →</a>
         </div>
         <div class="nz-download-visual" aria-hidden="true">
-          <div class="nz-download-phone">
-            <div class="screen">
-              <div class="card-ui">
-                <div style="display:flex;justify-content:space-between;align-items:center">
-                  <strong>Nazora Tech</strong>
-                  <img src="assets/images/logo/nazora-logo.png" alt="" width="434" height="198" loading="lazy" decoding="async" style="width:54px;height:auto">
-                </div>
-                <div style="margin-top:14px;font-weight:700">Free project consultation</div>
-                <div style="margin-top:8px;opacity:.85">Web &middot; App &middot; Software &middot; Kolkata</div>
-              </div>
-              <div class="chip-row">
-                <span><i class="ri-smartphone-line"></i></span>
-                <span><i class="ri-file-list-3-line"></i></span>
-                <span><i class="ri-send-plane-fill"></i></span>
-                <span><i class="ri-wallet-3-line"></i></span>
-              </div>
-              <div class="tile-row"><span></span><span></span></div>
-            </div>
-          </div>
+          <picture>
+            <source srcset="assets/images/home/cta-phones.webp" type="image/webp">
+            <img src="assets/images/home/cta-phones.jpg" alt="" width="1152" height="864" loading="lazy" decoding="async">
+          </picture>
+          <p class="nz-download-note">Conceptual product previews</p>
         </div>
       </div>
     </div>
@@ -487,5 +498,6 @@ include 'header.php';
   </section>
 
   <script src="assets/js/contact-form.js?v=<?php echo (int) @filemtime(__DIR__ . '/assets/js/contact-form.js'); ?>" defer></script>
+  <script src="assets/js/nz-home.js?v=<?php echo (int) @filemtime(__DIR__ . '/assets/js/nz-home.js'); ?>" defer></script>
 
 <?php include 'footer.php'; ?>

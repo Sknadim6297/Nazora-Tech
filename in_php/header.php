@@ -4,9 +4,9 @@ $company = site_company_name();
 $currentPage = basename($_SERVER['PHP_SELF']);
 $seoMap = [
   'index.php' => [
-    'title' => 'Website & App Development Company Kolkata | ' . $company,
-    'description' => $company . ' offers website, mobile app, custom software and AI automation services in Kolkata. Affordable digital solutions for growing businesses.',
-    'keywords' => 'website development company Kolkata, app development company Kolkata, software development company Kolkata, AI automation Kolkata, Nazora Tech'
+    'title' => $company . ' | Website, App & Software Development Company in Kolkata',
+    'description' => $company . ' is a Kolkata-based website, mobile app and custom software development company helping businesses build scalable digital solutions.',
+    'keywords' => 'Nazora Tech, website development company Kolkata, app development company Kolkata, software development company Kolkata, AI automation Kolkata'
   ],
   'about_us.php' => [
     'title' => 'About ' . $company . ' | Web & App Company Kolkata',
@@ -97,11 +97,12 @@ $pageKeywords = $pageKeywords ?? $seoData['keywords'];
 $pageRobots = $pageRobots ?? 'index, follow';
 $canonicalSlug = preg_replace('~\.php$~', '', $currentPage);
 $canonicalSlug = $canonicalSlug === 'index' ? '' : $canonicalSlug;
-$pageCanonical = isset($pageCanonical) ? $pageCanonical : site_url($canonicalSlug);
-$pageOgImage = $pageOgImage ?? site_url('assets/images/logo/nazora-logo.png');
+// Google-facing canonical always uses https://nazora.tech (non-www).
+$pageCanonical = isset($pageCanonical) ? $pageCanonical : site_seo_url($canonicalSlug);
+$pageOgImage = $pageOgImage ?? site_seo_url('assets/images/logo/nazora-logo.png');
 $pageOgImageAlt = $pageOgImageAlt ?? ($company . ' logo');
-$pageOgImageWidth = (int) ($pageOgImageWidth ?? 0);
-$pageOgImageHeight = (int) ($pageOgImageHeight ?? 0);
+$pageOgImageWidth = (int) ($pageOgImageWidth ?? 434);
+$pageOgImageHeight = (int) ($pageOgImageHeight ?? 198);
 $pageBaseHref = $pageBaseHref ?? null;
 $pageOgType = $pageOgType ?? 'website';
 $pageTwitterCard = $pageTwitterCard ?? 'summary_large_image';
@@ -110,7 +111,8 @@ $pageServiceSchema = $pageServiceSchema ?? null;
 $pageBreadcrumbs = $pageBreadcrumbs ?? null;
 $pagePreloadImage = $pagePreloadImage ?? null;
 
-$homeUrl = site_url('');
+$homeUrl = site_seo_url('');
+$logoUrl = site_seo_url('assets/images/logo/nazora-logo.png');
 $orgId = $homeUrl . '#organization';
 $bizId = $homeUrl . '#business';
 $webId = $homeUrl . '#website';
@@ -121,16 +123,24 @@ if ($currentPage === 'index.php') {
     '@type' => 'Organization',
     '@id' => $orgId,
     'name' => $company,
-    'alternateName' => 'Nazora TECH',
+    'legalName' => 'SK NADIM',
+    'alternateName' => ['Nazora TECH', 'Nazora'],
     'url' => $homeUrl,
     'logo' => [
       '@type' => 'ImageObject',
-      'url' => site_url('assets/images/logo/nazora-logo.png'),
+      'url' => $logoUrl,
       'width' => 434,
       'height' => 198,
     ],
+    'image' => $logoUrl,
     'email' => site_contact_email(),
     'telephone' => site_phone_display(),
+    'address' => [
+      '@type' => 'PostalAddress',
+      'addressLocality' => 'Kestopur, Kolkata',
+      'addressRegion' => 'West Bengal',
+      'addressCountry' => 'IN',
+    ],
     'contactPoint' => [
       '@type' => 'ContactPoint',
       'telephone' => site_phone_display(),
@@ -143,13 +153,13 @@ if ($currentPage === 'index.php') {
     '@type' => 'ProfessionalService',
     '@id' => $bizId,
     'name' => $company,
-    'alternateName' => 'Nazora TECH',
     'url' => $homeUrl,
-    'image' => site_url('assets/images/logo/nazora-logo.png'),
-    'description' => 'Website development, mobile app development, custom software, digital marketing, and AI automation services in Kolkata, West Bengal, India.',
+    'image' => $logoUrl,
+    'description' => $company . ' is a Kolkata-based website, mobile app and custom software development company helping businesses build scalable digital solutions.',
     'email' => site_contact_email(),
     'telephone' => site_phone_display(),
     'priceRange' => '₹₹',
+    'parentOrganization' => ['@id' => $orgId],
     'address' => [
       '@type' => 'PostalAddress',
       'addressLocality' => 'Kestopur, Kolkata',
@@ -163,6 +173,13 @@ if ($currentPage === 'index.php') {
       ['@type' => 'City', 'name' => 'Kolkata'],
       ['@type' => 'State', 'name' => 'West Bengal'],
       ['@type' => 'Country', 'name' => 'India'],
+    ],
+    'knowsAbout' => [
+      'Website Development',
+      'Mobile App Development',
+      'Custom Software Development',
+      'Digital Marketing',
+      'AI Automation',
     ],
     'serviceType' => [
       'Website Development',
@@ -391,11 +408,17 @@ if (!empty($pageServiceSchema) && is_array($pageServiceSchema)) {
               <div class="menu-overlay"></div>
               <nav class="menu-block" id="append-menu-header" aria-label="Main menu">
                 <div class="mobile-menu-head">
-                  <div class="go-back">
+                  <div class="go-back" role="button" tabindex="0" aria-label="Go back">
                     <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
                   </div>
                   <div class="current-menu-title"></div>
-                  <div class="mobile-menu-close">&times;</div>
+                  <a class="mobile-menu-logo" href="./" aria-label="<?php echo htmlspecialchars($company, ENT_QUOTES, 'UTF-8'); ?> home">
+                    <picture>
+                      <source srcset="assets/images/logo/nazora-logo.webp" type="image/webp">
+                      <img src="assets/images/logo/nazora-logo.png" alt="<?php echo htmlspecialchars($company, ENT_QUOTES, 'UTF-8'); ?> logo" width="434" height="198">
+                    </picture>
+                  </a>
+                  <button type="button" class="mobile-menu-close" aria-label="Close menu">&times;</button>
                 </div>
                 <ul class="site-menu-main">
                   <li class="nav-item">
@@ -428,6 +451,23 @@ if (!empty($pageServiceSchema) && is_array($pageServiceSchema)) {
                     <a class="nav-link-item" href="contact">Contact</a>
                   </li>
                 </ul>
+                <div class="nz-mobile-menu-foot">
+                  <a class="nz-mobile-cta" href="contact">Get a Quote</a>
+                  <div class="nz-mobile-actions">
+                    <a class="nz-mobile-action nz-mobile-wa" href="<?php echo site_whatsapp_url(); ?>" target="_blank" rel="noopener">
+                      <i class="ri-whatsapp-fill" aria-hidden="true"></i>
+                      <span>WhatsApp</span>
+                    </a>
+                    <a class="nz-mobile-action nz-mobile-call" href="<?php echo site_phone_tel(); ?>">
+                      <i class="ri-phone-fill" aria-hidden="true"></i>
+                      <span>Call</span>
+                    </a>
+                  </div>
+                  <p class="nz-mobile-loc">
+                    <i class="ri-map-pin-2-fill" aria-hidden="true"></i>
+                    Kestopur, Kolkata
+                  </p>
+                </div>
               </nav>
             </div>
             <div class="nz-header-actions">

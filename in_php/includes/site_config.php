@@ -183,6 +183,34 @@ function site_url(string $page = ''): string
     return site_origin() . site_base_path() . ($page === '' ? '/' : '/' . $page);
 }
 
+/**
+ * Google-facing absolute URL on the canonical public host (SITE_PUBLIC_URL).
+ * Always https://nazora.tech/... — independent of www/local request host.
+ * Use for canonical, Open Graph, JSON-LD, and sitemap locs.
+ */
+function site_seo_url(string $page = ''): string
+{
+    $base = rtrim(site_public_url(), '/');
+    $page = trim($page);
+
+    if ($page === '' || $page === '/' || strcasecmp($page, 'index') === 0 || strcasecmp($page, 'index.php') === 0) {
+        return $base . '/';
+    }
+
+    if (preg_match('#^https?://#i', $page)) {
+        return $page;
+    }
+
+    $page = ltrim($page, '/');
+    if (strpos($page, '?') !== false) {
+        [$file, $query] = explode('?', $page, 2);
+
+        return $base . '/' . trim($file, '/') . '?' . $query;
+    }
+
+    return $base . '/' . $page;
+}
+
 function site_seo_truncate(string $text, int $maxLength = 155): string
 {
     $text = trim((string) preg_replace('/\s+/', ' ', strip_tags($text)));

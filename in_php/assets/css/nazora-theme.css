@@ -374,6 +374,228 @@ body.nazora-theme .post__title {
   display: none;
 }
 
+/* ——— Mobile sidebar menu ——— */
+@media (max-width: 991px) {
+  .nz-site-header .menu-block {
+    width: min(86vw, 340px) !important;
+    background: #fff !important;
+    box-shadow: 8px 0 40px rgba(11, 21, 38, 0.18);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nz-site-header .menu-block .mobile-menu-head {
+    height: 72px !important;
+    padding: 0 8px 0 16px;
+    border-bottom: 1px solid var(--nz-line) !important;
+    background: var(--nz-navy) !important;
+    gap: 8px;
+  }
+
+  .nz-site-header .menu-block .mobile-menu-head .mobile-menu-logo {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-right: auto;
+  }
+
+  .nz-site-header .menu-block .mobile-menu-head .mobile-menu-logo picture,
+  .nz-site-header .menu-block .mobile-menu-head .mobile-menu-logo img {
+    display: block;
+    width: 128px;
+    max-width: 100%;
+    height: auto;
+    max-height: 44px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .nz-site-header .menu-block .mobile-menu-head.active .mobile-menu-logo {
+    display: none;
+  }
+
+  .nz-site-header .menu-block .mobile-menu-head .go-back {
+    height: 44px !important;
+    width: 44px !important;
+    border: 0 !important;
+    border-radius: 10px;
+    color: #fff !important;
+    font-size: 22px !important;
+    line-height: 44px !important;
+    flex: 0 0 auto;
+  }
+
+  .nz-site-header .menu-block .mobile-menu-head .current-menu-title {
+    color: #fff !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    letter-spacing: -0.01em;
+    flex: 1 1 auto;
+  }
+
+  .nz-site-header .menu-block .mobile-menu-head .mobile-menu-close {
+    height: 44px !important;
+    width: 44px !important;
+    border: 0 !important;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff !important;
+    font-size: 28px !important;
+    line-height: 40px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    flex: 0 0 auto;
+  }
+
+  .nz-site-header .menu-block .mobile-menu-head .mobile-menu-close:hover,
+  .nz-site-header .menu-block .mobile-menu-head .go-back:hover {
+    background: var(--nz-red);
+    color: #fff !important;
+  }
+
+  .nz-site-header .menu-block .site-menu-main {
+    flex: 1 1 auto;
+    height: auto !important;
+    padding: 10px 0 8px;
+  }
+
+  .nz-site-header .site-menu-main > li > a.nav-link-item {
+    color: var(--nz-navy) !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    letter-spacing: -0.01em;
+    height: 54px !important;
+    line-height: 54px !important;
+    padding: 0 56px 0 20px !important;
+    border-bottom-color: rgba(11, 21, 38, 0.08) !important;
+  }
+
+  .nz-site-header .site-menu-main > li > a.nav-link-item:hover,
+  .nz-site-header .site-menu-main > li > a.nav-link-item:focus {
+    color: var(--nz-red) !important;
+    background: rgba(196, 30, 58, 0.05);
+  }
+
+  .nz-site-header .site-menu-main > li > a i {
+    height: 54px !important;
+    width: 54px !important;
+    line-height: 54px !important;
+    color: var(--nz-navy);
+  }
+
+  .nz-site-header .site-menu-main .sub-menu {
+    background: #fff !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 72px 0 20px !important;
+    opacity: 1 !important;
+    z-index: 20;
+  }
+
+  .nz-site-header .site-menu-main .sub-menu--item > a {
+    display: block;
+    padding: 14px 20px;
+    font-weight: 600;
+    color: var(--nz-navy) !important;
+    border-bottom: 1px solid rgba(11, 21, 38, 0.08);
+  }
+
+  .nz-site-header .site-menu-main .sub-menu--item > a:hover,
+  .nz-site-header .site-menu-main .sub-menu--item > a:hover .menu-item-text {
+    color: var(--nz-red) !important;
+  }
+
+  .nz-site-header .menu-block .nz-mobile-menu-foot {
+    margin-top: auto;
+    padding: 18px 20px 24px;
+    border-top: 1px solid var(--nz-line);
+    background: linear-gradient(180deg, #fff 0%, #f6f8fb 100%);
+  }
+
+  .nz-site-header .menu-block .mobile-menu-head.active ~ .nz-mobile-menu-foot {
+    display: none;
+  }
+
+  .nz-site-header .menu-block .nz-mobile-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    border-radius: 10px;
+    background: var(--nz-red);
+    color: #fff !important;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 12px;
+  }
+
+  .nz-site-header .menu-block .nz-mobile-cta:hover {
+    background: var(--nz-red-dark, #9e1730);
+    color: #fff !important;
+  }
+
+  .nz-site-header .menu-block .nz-mobile-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .nz-site-header .menu-block .nz-mobile-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff !important;
+  }
+
+  .nz-site-header .menu-block .nz-mobile-action i {
+    font-size: 16px;
+  }
+
+  .nz-site-header .menu-block .nz-mobile-wa {
+    background: #25d366;
+  }
+
+  .nz-site-header .menu-block .nz-mobile-call {
+    background: var(--nz-navy);
+  }
+
+  .nz-site-header .menu-block .nz-mobile-loc {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: rgba(11, 21, 38, 0.62);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .nz-site-header .menu-block .nz-mobile-loc i {
+    color: var(--nz-red);
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 992px) {
+  .nz-site-header .mobile-menu-logo,
+  .nz-site-header .nz-mobile-menu-foot {
+    display: none !important;
+  }
+}
+
 /* ——— Breadcrumbs (all inner pages) ——— */
 .nazora-theme .optech-breadcrumb {
   background: linear-gradient(120deg, #07101c 0%, #0b1526 45%, #163056 100%) !important;

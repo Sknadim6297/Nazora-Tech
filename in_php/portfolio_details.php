@@ -27,7 +27,7 @@ $imageAlt = portfolio_image_alt($project);
 
 $pageTitle = portfolio_seo_title($project);
 $pageDescription = portfolio_meta_description($project);
-$pageCanonical = site_url('portfolio_details') . '?slug=' . rawurlencode($project['slug']);
+$pageCanonical = site_seo_url('portfolio_details?slug=' . rawurlencode($project['slug']));
 $pageOgType = 'article';
 $pageBreadcrumbs = [
     ['name' => 'Home', 'url' => site_url('')],

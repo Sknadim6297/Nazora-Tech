@@ -1,25 +1,27 @@
-# Enable URL Rewriting (works identically at domain root / on Hostinger and in local subfolders)
+# Enable URL Rewriting (works at domain root on Hostinger and in local subfolders)
 RewriteEngine On
 
-# Canonical HTTPS + non-www redirect on production domain (handles proxy X-Forwarded-Proto safely)
-RewriteCond %{HTTP_HOST} ^www\.nazora\.tech$ [NC,OR]
-RewriteCond %{HTTP_HOST} ^nazora\.tech$ [NC]
-RewriteCond %{HTTPS} off
+# --- Canonical host: HTTPS + non-www (https://nazora.tech) ---
+# REQUEST_URI keeps the path; Apache/LiteSpeed appends the original query string.
+# X-Forwarded-Proto covers Hostinger reverse-proxy TLS termination.
+RewriteCond %{HTTP_HOST} ^(www\.)?nazora\.tech$ [NC]
+RewriteCond %{HTTPS} !=on
 RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
-RewriteRule ^(.*)$ https://nazora.tech/$1 [R=301,L]
+RewriteRule ^ https://nazora.tech%{REQUEST_URI} [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^www\.nazora\.tech$ [NC]
-RewriteRule ^(.*)$ https://nazora.tech/$1 [R=301,L]
+RewriteRule ^ https://nazora.tech%{REQUEST_URI} [R=301,L]
 
 # Private paths: database, backups, enquiry logs, PHP includes, Composer vendor. Uploaded images stay public.
 RewriteRule ^storage/(?!uploads/) - [F,L]
 RewriteRule ^storage/uploads/.*\.(php\d?|phtml|phar|cgi|pl|sh)$ - [F,L,NC]
 RewriteRule ^(submissions|includes|vendor)(/|$) - [F,L]
 
-# Redirect /index and /index.php to canonical directory root URL
-RewriteCond %{THE_REQUEST} \s/+(.*/)?index(?:\.php)?[\s?] [NC]
-RewriteCond %{REQUEST_URI} ^(.*/)index(?:\.php)?$ [NC]
-RewriteRule ^index(?:\.php)?$ %1 [R=301,L]
+# --- Homepage duplicates: /index and /index.php → directory root (/ or /subfolder/) ---
+# Uses THE_REQUEST so internal rewrites to index.php are not redirected in a loop.
+# Capture optional subdirectory prefix so local XAMPP paths keep working.
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index(?:\.php)?(?:[\s?]|$) [NC]
+RewriteRule ^index(?:\.php)?/?$ /%1 [R=301,L]
 
 # Blog routes, sitemap, robots
 RewriteRule ^blog/?$ blog.php [L,QSA]
